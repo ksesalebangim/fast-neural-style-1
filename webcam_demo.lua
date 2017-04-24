@@ -1,3 +1,7 @@
+local cv = require 'cv'
+require 'cv.imgproc'
+
+
 require 'torch'
 require 'nn'
 require 'image'
@@ -74,7 +78,7 @@ local function main()
   while true do
     -- Grab a frame from the webcam
     local img = cam:forward()
-
+    image.hflip(img,img)
     -- Preprocess the frame
     local H, W = img:size(2), img:size(3)
     img = img:view(1, 3, H, W)
@@ -87,6 +91,9 @@ local function main()
 
       -- Deprocess the frame and show the image
       local img_out = preprocess.deprocess(img_out_pre)[1]:float()
+      for i=1, 3 do
+        cv.GaussianBlur{src=img_out[i]:float(), ksize={7, 7}, sigmaX=0.8, dst=img_out[i], sigmaY=0.8 }
+      end
       table.insert(imgs_out, img_out)
     end
     local img_disp = image.toDisplayTensor{
@@ -112,4 +119,3 @@ end
 
 
 main()
-
