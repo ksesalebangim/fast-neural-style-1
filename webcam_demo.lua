@@ -1,6 +1,7 @@
 local cv = require 'cv'
 require 'cv.imgproc'
 
+require 'math'
 
 require 'torch'
 require 'nn'
@@ -74,6 +75,8 @@ local function main()
   }
   local cam = image.Camera(camera_opt)
 
+  local timer = torch.Timer()
+
   local win = nil
   while true do
     -- Grab a frame from the webcam
@@ -91,9 +94,33 @@ local function main()
 
       -- Deprocess the frame and show the image
       local img_out = preprocess.deprocess(img_out_pre)[1]:float()
-      for i=1, 3 do
-        cv.GaussianBlur{src=img_out[i]:float(), ksize={7, 7}, sigmaX=0.8, dst=img_out[i], sigmaY=0.8 }
+      img = img:float()
+
+      local ramp_time = 10
+      local stay_time = 15
+      local max_strength = 0.8
+
+      local current_time = timer:time().real % ((ramp_time + stay_time) * 2)
+      local is_descending = (current_time > (ramp_time + stay_time))
+      current_time = current_time %(ramp_time + stay_time)
+
+      local alpha
+      if current_time < ramp_time then
+        alpha = current_time / ramp_time
+      else
+        alpha = 1
       end
+      if is_descending then
+        alpha = 1 - alpha
+      end
+
+      alpha = alpha * max_strength
+
+      for i=1, 3 do
+        --cv.GaussianBlur{src=img_out[i]:float(), ksize={7, 7}, sigmaX=0.8, dst=img_out[i], sigmaY=0.8 }
+        cv.addWeighted {img_out[i], alpha, img[1][i], 1-alpha, 0, img_out[i]}
+      end
+      --cv.addWeighted {img_out, 0.5, img, 0.5, 0, img_out}
       table.insert(imgs_out, img_out)
     end
     local img_disp = image.toDisplayTensor{
