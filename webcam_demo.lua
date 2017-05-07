@@ -96,9 +96,9 @@ local function main()
       local img_out = preprocess.deprocess(img_out_pre)[1]:float()
       img = img:float()
 
-      local ramp_time = 10
-      local stay_time = 15
-      local max_strength = 0.8
+      local ramp_time = 20 -- FADE IN/OUT TIME (SECONDS)
+      local stay_time = 30 -- TIME ON/OFF (SECONDS)
+      local max_strength = 0.8 -- how strong is the effect (0 is none, 1 is only effect)
 
       local current_time = timer:time().real % ((ramp_time + stay_time) * 2)
       local is_descending = (current_time > (ramp_time + stay_time))
