@@ -43,15 +43,15 @@ local function main()
     if n == 'Key_Escape' then
       print('escape detected!')
       quit=true
-    else if n == 'Key_Space' then
+    elseif n == 'Key_Space' then
       print('Next effect')
-    else if n == 'Key_s' then
+    elseif n == 'Key_s' then
       print('Toggle Story mode')
-    else if n == 'Key_p' then
+    elseif n == 'Key_p' then
       print('Take picture')
-    else if n == 'Key_Up' then
+    elseif n == 'Key_Up' then
       print('Increase Effect')
-    else if n == 'Key_Down' then
+    elseif n == 'Key_Down' then
       print('Increase Reality')
     else
       print(k,n)
