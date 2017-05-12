@@ -22,8 +22,10 @@ local function loadModels(modelsObject)
   return models
 end
 
-local function init()
-  local fileName = 'sequence.json'
+local function init(fileName)
+  if not fileName then
+    fileName = 'sequence.json'
+  end
   local file = io.open(fileName, "r")
   if file then
     local content = file:read("*a")

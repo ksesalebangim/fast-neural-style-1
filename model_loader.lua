@@ -1,9 +1,6 @@
 require 'torch'
 require 'nn'
 
--- TODO: real logic here (e.g. all the dir or parse some json config file)
---local model_paths = {"models/instance_norm/candy.t7","models/instance_norm/la_muse.t7", "models/instance_norm/udnie.t7"}
- local model_paths = {"../fast-neural-style/mymodels/5_30_8000/fireCropped2.t7","../fast-neural-style/mymodels/5_30_8000/windswirllines.t7", "../fast-neural-style/mymodels/5_30_8000/lizardhead.t7"}
 local dtype = nil
 local M = {}
 local models = {}
@@ -55,9 +52,6 @@ end
 local function init(data_type, cudnn)
     dtype = data_type
     use_cudnn = cudnn
-    for _, checkpoint_path in ipairs(model_paths) do
-        table.insert(models, load_model(checkpoint_path))
-    end
 end
 
 
