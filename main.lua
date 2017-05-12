@@ -80,6 +80,12 @@ local function main()
 
   local preprocess = preprocess[model_loader.get_preprocess_method()]
 
+  -- TODO: dtype instead?
+  -- NOTE: this must happen before image.Camera() call since that implicitly depends on this
+  torch.setdefaulttensortype('torch.FloatTensor')
+  
+
+
   local camera_opt = {
     idx = opt.webcam_idx,
     fps = opt.webcam_fps,
@@ -90,9 +96,26 @@ local function main()
   local timer = torch.Timer()
 
   -- this requires GPU - move back to cv.GaussianBlur if cpu-only operation is needed
-  --local gaussian_filter = cv.cuda.createGaussianFilter{srcType=cv.CV_32F, dstType=cv.CV_32F, ksize=3, sigma1=0.8}
-  local gaussian_filter = cv.cuda.createSobelFilter{cv.CV_32F, cv.CV_32F, 1, 1}
 
+  --local gaussian_filter = cv.cuda.createGaussianFilter{srcType=cv.CV_32F, dstType=cv.CV_32F, ksize=3, sigma1=0.8}
+  
+  -- TAKE 2: use torch to run the convolution. For some reason, massively slower than using CPU even
+
+  local FILTER_SIZE = 7
+  local gaussian_kernel = image.gaussian(FILTER_SIZE, 0.8, 1, true):type(dtype)
+  --local gaussian_net = nn.Sequential()
+  --local gaussian_conv = nn.SpatialConvolution(1,1, FILTER_SIZE, FILTER_SIZE, 1,1, math.floor(FILTER_SIZE/2), math.floor(FILTER_SIZE/2))
+  --gaussian_net:add(gaussian_conv)
+  --print(gaussian_kernel)
+  --print(gaussian_conv.weight:size())
+  --gaussian_conv.weight:copy(gaussian_kernel)
+  --gaussian_conv.bias:zero()
+  --gaussian_net:type(dtype)
+  --if use_cudnn then
+  --  cudnn.convert(gaussian_net)
+  --end
+
+  local max_strength = 0.8
 
   local timer = torch.Timer()
 
@@ -101,6 +124,7 @@ local function main()
   while not quit do
     -- Grab a frame from the webcam
     local img = cam:forward()
+
     image.hflip(img,img)
     -- Preprocess the frame
     local H, W = img:size(2), img:size(3)
@@ -153,15 +177,24 @@ local function main()
     local blend_img = models[1]:forward(img_pre):mul(factor)
     blend_img:add(1 - factor, models[2]:forward(img_pre))
     -- Deprocess the frame
-    --local img_out = preprocess.deprocess(blend_img)[1]:float()
-    local img_out = preprocess.deprocess(blend_img)[1]
-    
+    local img_out = preprocess.deprocess(blend_img):mul(max_strength)[1]:float()
+    -- NOTE: use this instead of above line if running on GPU only
+    --local img_out = preprocess.deprocess(blend_img):mul(max_strength)[1]
+    -- NOTE: convolve runs only on the CPU :(
+    --print(img_out:size())
+    -- blur via torch on CPU (slower than OpenCV :( )
+    --img_out = image.convolve(img_out, gaussian_kernel,'same')
+    --print(img_out:size())
     for i=1, 3 do
-      --cv.GaussianBlur{src=img_out[i]:float(), ksize={7, 7}, sigmaX=0.8, dst=img_out[i], sigmaY=0.8 }
+      --cv.GaussianBlur{src=img_out[i], ksize={7, 7}, sigmaX=0.8, dst=img_out[i], sigmaY=0.8 }
       -- crashes because this is a tensor slice and not a contiguous tensor. fix :(
       -- https://github.com/VisionLabs/torch-opencv/issues/104
       --gaussian_filter:apply{src=img_out[i], dst=img_out[i]}
     end
+    -- filter via torch: commented out because it's slow
+    --img_out = gaussian_net:forward(img_out:view(3,1,H,W)):view(1,3,H,W)[1]
+    -- blend filtered image with unfiltered one
+    img_out:add(1 - max_strength,img[1])
     table.insert(imgs_out, img_out)
 
     local img_disp = image.toDisplayTensor{
@@ -189,6 +222,8 @@ local function main()
     qt.doevents()
   end
   print("quitting")
+  cam:stop()
+  print("stopped")
   win.window:close()
   qt.qApp:quit()
 end
