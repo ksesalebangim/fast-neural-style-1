@@ -7,19 +7,27 @@
   },
   {
     "name": "Water",
-    "path": "/waterfire"
+    "path": "../fast-neural-style/mymodels/5_30_8000/waterfire.t7"
+  },
+  {
+    "name": "Earth",
+    "path": "../fast-neural-style/mymodels/5_30_8000/earthpeel.t7"
+  },
+  {
+    "name": "Wind",
+    "path": "../fast-neural-style/mymodels/5_30_8000/windswirlslight.t7"
   },
   {
     "name": "Electricity",
-    "path": "/Spacelighting"
+    "path": "../fast-neural-style/mymodels/5_30_8000/Space_lightning.t7"
   }
   ],
   "sequence":
   [
     {"name":"Fire", "fadeIn": 1, "duration": 5, "strength": 0.5},
-    {"name":"Fire", "fadeIn": 1, "duration": 5, "strength": 1},
-    {"name":"Fire", "fadeIn": 1, "duration": 5, "strength": 0.2},
-    {"name":"Vangoch", "fadeIn": 1, "duration": 5, "strength": 0.6},
-    {"name":"Vangoch", "fadeIn": 1, "duration": 5, "strength": 0.6}
+    {"name":"Water", "fadeIn": 1, "duration": 5, "strength": 0.7},
+    {"name":"Earth", "fadeIn": 1, "duration": 5, "strength": 0.6},
+    {"name":"Wind", "fadeIn": 1, "duration": 5, "strength": 0.6},
+    {"name":"Electricity", "fadeIn": 1, "duration": 5, "strength": 0.2},
   ]
 }
