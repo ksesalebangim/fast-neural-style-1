@@ -47,13 +47,13 @@ local function load_model(checkpoint_path)
     return model
 end
 
-
+-- return [model 1, model 2, blend factor between model1 and model2 , blend factor of result with original camera feed]
 local function get_models()
     local t = timer:time().real
     base_index = math.floor(t / cycle_length)
-    local factor = math.sin(t * cycle_factor) + 1 * 0.5
-    
-    return models[1 + (base_index % #models)], models[1 + ((base_index + 1) % #models)], factor
+    local factor = 1.0 - (t % cycle_length) / cycle_length
+
+    return models[1 + (base_index % #models)], models[1 + ((base_index + 1) % #models)], factor, 0.8
 end
 
 local function get_preprocess_method()

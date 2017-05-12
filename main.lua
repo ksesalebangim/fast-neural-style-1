@@ -117,8 +117,6 @@ local function main()
   --  cudnn.convert(gaussian_net)
   --end
 
-  local max_strength = 0.8
-
   local timer = torch.Timer()
 
   local win = nil
@@ -174,12 +172,12 @@ local function main()
 
 
     -- do linear blend
-    local model1, model2, factor = model_loader.get_models()
+    local model1, model2, factor, camera_factor = model_loader.get_models()
 
     local blend_img = model1:forward(img_pre):mul(factor)
     blend_img:add(1 - factor, model2:forward(img_pre))
     -- Deprocess the frame
-    local img_out = preprocess.deprocess(blend_img):mul(max_strength)[1]:float()
+    local img_out = preprocess.deprocess(blend_img):mul(camera_factor)[1]:float()
     -- NOTE: use this instead of above line if running on GPU only
     --local img_out = preprocess.deprocess(blend_img):mul(max_strength)[1]
     -- blur via torch on CPU (slower than OpenCV :( )
@@ -194,7 +192,7 @@ local function main()
     -- filter via torch: commented out because it's slow
     --img_out = gaussian_net:forward(img_out:view(3,1,H,W)):view(1,3,H,W)[1]
     -- blend filtered image with unfiltered one
-    img_out:add(1 - max_strength,img[1])
+    img_out:add(1 - camera_factor,img[1])
     table.insert(imgs_out, img_out)
 
     local img_disp = image.toDisplayTensor{
