@@ -91,11 +91,20 @@ local function main()
 
   local dtype, use_cudnn = utils.setup_gpu(opt.gpu, opt.backend, opt.use_cudnn == 1)
   local opt_models = opt.models:split(',')
-  local sequence_filename = opt.sequence
+  local model_names = {opt_models[1], opt_models[2]}
+  local models = {}
+  -- load same model twice if onyl one provided
+  if model_names[2] == nil then
+    model_names[2] = model_names[1]
+  end
 
   model_loader.init(dtype, use_cudnn)
   -- NOTE: MUST happen after model_loader.init()
-  sequence_loader.init(sequence_filename)
+  sequence_loader.init()
+
+  --for _, checkpoint_path in ipairs(model_names) do
+  --  table.insert(models, model_loader.load_model(checkpoint_path))
+  --end
 
   local preprocess = preprocess[model_loader.get_preprocess_method()]
 
