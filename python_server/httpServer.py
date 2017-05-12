@@ -35,6 +35,7 @@ def led(led):
 @app.route('/screenshot')
 def screenshot():
     ImageGrab.grab_to_file(basePath+"images/"+str(int(time.time()))+".jpg")
+    mixer.play(str("camera.ogg"), 0)
     return ""
 
 @app.route('/playSound/<string:fileName>/fadeIn/<int:fadeInMS>')
