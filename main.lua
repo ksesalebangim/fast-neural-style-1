@@ -1,6 +1,6 @@
 local cv = require 'cv'
 require 'cv.imgproc'
-require 'cv.cudafilters'
+--require 'cv.cudafilters'
 
 require 'math'
 
@@ -41,7 +41,8 @@ cmd:option('-webcam_fps', 60)
 local function main()
   local quit = false
   local manual_mode = false
-  local manual_factor = 0
+  local manual_factor = 0.5
+  local manual_camera_factor = 0.5 
   local manual_timer = torch.Timer()
 
   local function keypress(k,n)
@@ -67,11 +68,17 @@ local function main()
     elseif n == 'Key_P' then
       print('Take picture')
     elseif n == 'Key_Up' then
-      print('Increase Effect ' .. manual_factor)
-      manual_factor = math.min(manual_factor + 0.01, 1)
+      print('Increase Effect ' .. manual_camera_factor)
+      manual_camera_factor = math.min(manual_camera_factor + 0.01, 1)
     elseif n == 'Key_Down' then
-      print('Increase Reality ' .. manual_factor)
-      manual_factor = math.max(manual_factor - 0.01, 0)
+      print('Increase Reality ' .. manual_camera_factor)
+      manual_camera_factor = math.max(manual_camera_factor - 0.01, 0)
+    elseif n == 'Key_Right' then
+      print('Increase next effect' .. manual_factor)
+      manual_factor = math.min(manual_factor + 0.01, 1)
+    elseif n == 'Key_Left' then
+      print('Increase previous effect' .. manual_factor)
+      manual_factor = math.max(manual_factor - 0.01,  0)
     else
       print(k,n)
     end
@@ -198,6 +205,7 @@ local function main()
     local model1, model2, factor, camera_factor = model_loader.get_models()
     if(manual_mode) then
       factor = manual_factor
+      camera_factor = manual_camera_factor
     end
 
     local blend_img = model1:forward(img_pre):mul(factor)
