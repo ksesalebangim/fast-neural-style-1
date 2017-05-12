@@ -40,20 +40,38 @@ cmd:option('-webcam_fps', 60)
 
 local function main()
   local quit = false
+  local manual_mode = false
+  local manual_factor = 0
+  local manual_timer = torch.Timer()
+
   local function keypress(k,n)
+    if n == 'Key_N' then
+      print('Next effect with cooldown')  
+      return
+    end
+    -- Any key but the N key sets manual mode
+    if not manual_mode then
+      print('Key detected - Entering Manual Mode')
+      manual_mode = true
+    end
+    manual_timer:reset()
+
     if n == 'Key_Escape' then
       print('escape detected!')
       quit=true
     elseif n == 'Key_Space' then
       print('Next effect')
-    elseif n == 'Key_s' then
+    elseif n == 'Key_S' then
       print('Toggle Story mode')
-    elseif n == 'Key_p' then
+      manual_mode = false
+    elseif n == 'Key_P' then
       print('Take picture')
     elseif n == 'Key_Up' then
-      print('Increase Effect')
+      print('Increase Effect ' .. manual_factor)
+      manual_factor = math.min(manual_factor + 0.01, 1)
     elseif n == 'Key_Down' then
-      print('Increase Reality')
+      print('Increase Reality ' .. manual_factor)
+      manual_factor = math.max(manual_factor - 0.01, 0)
     else
       print(k,n)
     end
@@ -122,6 +140,11 @@ local function main()
   local win = nil
   local listener = nil
   while not quit do
+    -- Check if should return to manual mode (1 min of idle time)
+    if(manual_mode and manual_timer:time().real > 60) then
+       print('Idle detected - Entering Story Mode')
+       manual_mode = false
+    end
     -- Grab a frame from the webcam
     local img = cam:forward()
 
@@ -173,6 +196,9 @@ local function main()
 
     -- do linear blend
     local model1, model2, factor, camera_factor = model_loader.get_models()
+    if(manual_mode) then
+      factor = manual_factor
+    end
 
     local blend_img = model1:forward(img_pre):mul(factor)
     blend_img:add(1 - factor, model2:forward(img_pre))
