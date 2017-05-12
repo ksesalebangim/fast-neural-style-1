@@ -15,10 +15,9 @@
   ],
   "sequence":
   [
-    ["Vangoch", 1, 20, 2, 0.5],
-    ["None", 1, 10, 1, 0.1],
-    ["Kandinski", 1, 20, 1, 1],
-    ["Kandinski", 1, 20, 0, 0.2],
-    ["Vangoch", 1, 10, 1, 0.3]
+    {"name":"Vangoch", "fadeIn": 1, "duration": 20, "strength": 0.5},
+    {"name":"Kandinski", "fadeIn": 1, "duration": 20, "strength": 1},
+    {"name":"Kandinski", "fadeIn": 1, "duration": 20, "strength": 0.2},
+    {"name":"Vangoch", "fadeIn": 1, "duration": 10, "strength": 0.6}
   ]
 }
