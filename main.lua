@@ -93,18 +93,9 @@ local function main()
   local opt_models = opt.models:split(',')
   local sequence_filename = opt.sequence
 
-  -- load same model twice if onyl one provided
-  if model_names[2] == nil then
-    model_names[2] = model_names[1]
-  end
-
   model_loader.init(dtype, use_cudnn)
   -- NOTE: MUST happen after model_loader.init()
   sequence_loader.init(sequence_filename)
-
-  --for _, checkpoint_path in ipairs(model_names) do
-  --  table.insert(models, model_loader.load_model(checkpoint_path))
-  --end
 
   local preprocess = preprocess[model_loader.get_preprocess_method()]
 
