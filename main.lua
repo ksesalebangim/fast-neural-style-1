@@ -73,7 +73,6 @@ local function main()
 
   model_loader.init(dtype, use_cudnn)
 
-  local preprocess_method = nil
   for _, checkpoint_path in ipairs(model_names) do
     table.insert(models, model_loader.load_model(checkpoint_path))
   end
@@ -175,10 +174,10 @@ local function main()
 
 
     -- do linear blend
-    local factor = (math.sin(timer:time().real / 3) + 1) * 0.5
+    local model1, model2, factor = model_loader.get_models()
 
-    local blend_img = models[1]:forward(img_pre):mul(factor)
-    blend_img:add(1 - factor, models[2]:forward(img_pre))
+    local blend_img = model1:forward(img_pre):mul(factor)
+    blend_img:add(1 - factor, model2:forward(img_pre))
     -- Deprocess the frame
     local img_out = preprocess.deprocess(blend_img):mul(max_strength)[1]:float()
     -- NOTE: use this instead of above line if running on GPU only
@@ -187,7 +186,7 @@ local function main()
     -- NOTE: convolve() runs only on the CPU :(
     --img_out = image.convolve(img_out, gaussian_kernel,'same')
     for i=1, 3 do
-      --cv.GaussianBlur{src=img_out[i], ksize={7, 7}, sigmaX=0.8, dst=img_out[i], sigmaY=0.8 }
+      cv.GaussianBlur{src=img_out[i], ksize={7, 7}, sigmaX=0.8, dst=img_out[i], sigmaY=0.8 }
       -- crashes because this is a tensor slice and not a contiguous tensor. fix :(
       -- https://github.com/VisionLabs/torch-opencv/issues/104
       --gaussian_filter:apply{src=img_out[i], dst=img_out[i]}
