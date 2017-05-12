@@ -20,6 +20,18 @@
   {
     "name": "Electricity",
     "path": "../fast-neural-style/mymodels/5_30_8000/Space_lightning.t7"
+  },
+  {
+    "name": "Leapord",
+    "path": "../fast-neural-style/mymodels/5_30_8000/leapordprint.t7"
+  },
+  {
+    "name": "Lizard",
+    "path": "../fast-neural-style/mymodels/5_30_8000/lizardhead.t7"
+  },
+  {
+    "name": "Feathers",
+    "path": "../fast-neural-style/mymodels/5_30_8000/60116643-abstract-seamless-feathers-pattern-white.t7"
   }
   ],
   "sequence":
@@ -29,5 +41,8 @@
     {"name":"Earth", "fadeIn": 1, "duration": 5, "strength": 0.6},
     {"name":"Wind", "fadeIn": 1, "duration": 5, "strength": 0.6},
     {"name":"Electricity", "fadeIn": 1, "duration": 5, "strength": 0.2},
+    {"name":"Leapord", "fadeIn": 1, "duration": 5, "strength": 0.5},
+    {"name":"Lizard", "fadeIn": 1, "duration": 5, "strength": 0.7},
+    {"name":"Feathers", "fadeIn": 1, "duration": 5, "strength": 0.6}
   ]
 }
