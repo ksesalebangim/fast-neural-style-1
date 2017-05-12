@@ -20,6 +20,7 @@ local utils = require 'fast_neural_style.utils'
 local preprocess = require 'fast_neural_style.preprocess'
 
 local model_loader = require 'model_loader'
+local sequence_loader = require 'sequence_loader'
 
 local cmd = torch.CmdLine()
 
@@ -97,10 +98,12 @@ local function main()
   end
 
   model_loader.init(dtype, use_cudnn)
+  -- NOTE: MUST happen after model_loader.init()
+  sequence_loader.init()
 
-  for _, checkpoint_path in ipairs(model_names) do
-    table.insert(models, model_loader.load_model(checkpoint_path))
-  end
+  --for _, checkpoint_path in ipairs(model_names) do
+  --  table.insert(models, model_loader.load_model(checkpoint_path))
+  --end
 
   local preprocess = preprocess[model_loader.get_preprocess_method()]
 
@@ -202,7 +205,7 @@ local function main()
 
 
     -- do linear blend
-    local model1, model2, factor, camera_factor = model_loader.get_models()
+    local model1, model2, factor, camera_factor = sequence_loader.get_models()
     if(manual_mode) then
       factor = manual_factor
       camera_factor = manual_camera_factor
