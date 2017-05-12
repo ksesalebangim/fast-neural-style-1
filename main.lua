@@ -95,7 +95,10 @@ local function main()
   local cam = image.Camera(camera_opt)
   local timer = torch.Timer()
 
-  -- this requires GPU - move back to cv.GaussianBlur if cpu-only operation is needed
+  -- cuda gaussian filter, requires GPU
+  -- Unfortunately, crashes because we run on a tensor slice and not a contiguous tensor.
+  -- TODO: try reshaping the tensor
+  -- https://github.com/VisionLabs/torch-opencv/issues/104
 
   --local gaussian_filter = cv.cuda.createGaussianFilter{srcType=cv.CV_32F, dstType=cv.CV_32F, ksize=3, sigma1=0.8}
   
@@ -180,11 +183,9 @@ local function main()
     local img_out = preprocess.deprocess(blend_img):mul(max_strength)[1]:float()
     -- NOTE: use this instead of above line if running on GPU only
     --local img_out = preprocess.deprocess(blend_img):mul(max_strength)[1]
-    -- NOTE: convolve runs only on the CPU :(
-    --print(img_out:size())
     -- blur via torch on CPU (slower than OpenCV :( )
+    -- NOTE: convolve() runs only on the CPU :(
     --img_out = image.convolve(img_out, gaussian_kernel,'same')
-    --print(img_out:size())
     for i=1, 3 do
       --cv.GaussianBlur{src=img_out[i], ksize={7, 7}, sigmaX=0.8, dst=img_out[i], sigmaY=0.8 }
       -- crashes because this is a tensor slice and not a contiguous tensor. fix :(
