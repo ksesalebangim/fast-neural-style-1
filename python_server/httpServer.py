@@ -85,9 +85,31 @@ def watchdog():
 
 @app.route('/startWatchdog')
 def startWatchdog():
+    p = subprocess.Popen(["wmctrl" ,"-r" ,"image.display", "-b" ,"add,fullscreen"], stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+    out, err = p.communicate()
     threadEvent.set()
     threading.Thread(target=watchdogLoop).start()
     return str("true")
+
+@app.route('/killall')
+def killall():
+    threadEvent.clear()
+    p = subprocess.Popen(['service', 'supervisor','stop'], stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+    out, err = p.communicate()
+    p = subprocess.Popen(['killall', 'qlua'], stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+    out, err = p.communicate()
+
+    shutdown_server()
+
+    p = subprocess.Popen(['killall', 'sudo'], stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+    out, err = p.communicate()
+    p = subprocess.Popen(['killall', 'python'], stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+    out, err = p.communicate()
 
 """
 @app.route('/setColor/<r>/<g>/<b>')
