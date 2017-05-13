@@ -40,6 +40,30 @@
   {
     "name": "Feathers",
     "path": "../fast-neural-style/mymodels/5_30_8000/60116643-abstract-seamless-feathers-pattern-white-feathers-with-black-outline-feather-on-white-background.t7"
+  },
+  {
+    "name": "AlexGrey",
+    "path": "../fast-neural-style/mymodels/5_30_8000/alexgrayeyes3.t7"
+  },
+  {
+    "name": "Triangle",
+    "path": "../fast-neural-style/mymodels/5_30_8000/trianglePattern.t7"
+  },
+  {
+    "name": "Cat",
+    "path": "../fast-neural-style/mymodels/5_30_8000/cat.t7"
+  },
+  {
+    "name": "Graffiti",
+    "path": "../fast-neural-style/mymodels/5_30_8000/graffiti2.t7"
+  },
+  {
+    "name": "Picasso",
+    "path": "../fast-neural-style/mymodels/5_30_8000/picasso.t7"
+  },
+  {
+    "name": "Pineapple",
+    "path": "../fast-neural-style/mymodels/5_30_8000/pineapple.t7"
   }
   ],
   "sequencewindfire":
@@ -69,17 +93,24 @@
     {"name":"Styledwind", "fadeIn": 5, "duration": 20, "strength": 0.7},
     {"name":"Gattaca", "fadeIn": 5, "duration": 20, "strength": 0.6}
   ],
+  "sequencePsy":
+  [
+    {"name":"AlexGrey", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Triangle", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Cat", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Graffiti", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Picasso", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Gattaca", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Pineapple", "fadeIn": 5, "duration": 29, "strength": 0.8}
+  ],
   "sequence":
   [
-    {"name":"Leapord", "fadeIn": 5, "duration": 20, "strength": 0.5},
-    {"name":"Lizard", "fadeIn": 5, "duration": 20, "strength": 0.7},
-    {"name":"Feathers", "fadeIn": 5, "duration": 20, "strength": 0.6},
-    {"name":"RoundLetterWork", "fadeIn": 5, "duration": 20, "strength": 0.5},
-    {"name":"Styledwind", "fadeIn": 5, "duration": 20, "strength": 0.7},
-    {"name":"Gattaca", "fadeIn": 5, "duration": 20, "strength": 0.6},
-    {"name":"Fire", "fadeIn": 6, "duration": 30, "strength": 0.5},
-    {"name":"Water", "fadeIn": 6, "duration": 30, "strength": 0.7},
-    {"name":"Earth", "fadeIn": 6, "duration": 30, "strength": 0.6},
-    {"name":"Wind", "fadeIn": 6, "duration": 30, "strength": 0.6}
+    {"name":"AlexGrey", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Triangle", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Cat", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Graffiti", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Picasso", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Gattaca", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Pineapple", "fadeIn": 5, "duration": 29, "strength": 0.8}
   ]
 }
