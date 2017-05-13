@@ -44,10 +44,24 @@
   ],
   "sequence":
   [
-    {"name":"Fire", "fadeIn": 1, "duration": 5, "strength": 0.5},
-    {"name":"Water", "fadeIn": 1, "duration": 5, "strength": 0.7},
-    {"name":"Earth", "fadeIn": 1, "duration": 5, "strength": 0.6},
-    {"name":"Wind", "fadeIn": 1, "duration": 5, "strength": 0.6}
+    {"name":"Fire", "fadeIn": 6, "duration": 30, "strength": 0.5},
+    {"name":"Water", "fadeIn": 6, "duration": 30, "strength": 0.7},
+    {"name":"Earth", "fadeIn": 6, "duration": 30, "strength": 0.6},
+    {"name":"Wind", "fadeIn": 6, "duration": 30, "strength": 0.6}
+  ],
+  "sequenceWindVariation":
+  [
+    {"name":"Wind", "fadeIn": 6, "duration": 20, "strength": 0.8},
+    {"name":"Wind", "fadeIn": 10, "duration": 5, "strength": 0.2},
+    {"name":"Wind", "fadeIn": 5, "duration": 30, "strength": 0.5},
+    {"name":"Wind", "fadeIn": 5, "duration": 30, "strength": 1.0}
+  ],
+  "sequenceWaiting":
+  [
+    {"name":"Wind", "fadeIn": 6, "duration": 20, "strength": 0.8},
+    {"name":"Wind", "fadeIn": 10, "duration": 5, "strength": 0.2},
+    {"name":"Wind", "fadeIn": 5, "duration": 30, "strength": 0.5},
+    {"name":"Wind", "fadeIn": 5, "duration": 30, "strength": 1.0}
   ],
   "sequencePatterns":
   [
