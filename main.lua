@@ -116,7 +116,8 @@ local function main()
 
   local function keypress(k,n)
     if n == 'Key_N' then
-      print('Next effect with cooldown')  
+      print('Next effect with cooldown')
+      sequence_loader.next()
       return
     end
     -- Any key but the N key sets manual mode
@@ -129,9 +130,6 @@ local function main()
     if n == 'Key_Escape' then
       print('escape detected!')
       quit=true
-    elseif n == 'Key_N' then
-      print('Next effect with cooldown!')
-      sequence_loader.next()
     elseif n == 'Key_Space' then
       print('Next effect')
       sequence_loader.next()
