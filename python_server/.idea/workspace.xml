@@ -36,7 +36,7 @@
         <entry file="file://$PROJECT_DIR$/httpServer.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="248">
-              <caret line="87" column="79" lean-forward="true" selection-start-line="87" selection-start-column="79" selection-end-line="87" selection-end-column="79" />
+              <caret line="87" column="33" lean-forward="false" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="33" />
               <folding>
                 <element signature="e#19#42#0" expanded="true" />
               </folding>
@@ -814,7 +814,7 @@
     <entry file="file://$PROJECT_DIR$/httpServer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
-          <caret line="87" column="79" lean-forward="true" selection-start-line="87" selection-start-column="79" selection-end-line="87" selection-end-column="79" />
+          <caret line="87" column="33" lean-forward="false" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="33" />
           <folding>
             <element signature="e#19#42#0" expanded="true" />
           </folding>
