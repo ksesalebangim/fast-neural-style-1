@@ -40,6 +40,30 @@
   {
     "name": "Feathers",
     "path": "../fast-neural-style/mymodels/5_30_8000/60116643-abstract-seamless-feathers-pattern-white-feathers-with-black-outline-feather-on-white-background.t7"
+  },
+  {
+    "name": "AlexGrey",
+    "path": "../fast-neural-style/mymodels/5_30_8000/Alexgrayeyes3.t7"
+  },
+  {
+    "name": "Triangle",
+    "path": "../fast-neural-style/mymodels/5_30_8000/trianglePattern.t7"
+  },
+  {
+    "name": "Cat",
+    "path": "../fast-neural-style/mymodels/5_30_8000/cat.t7"
+  },
+  {
+    "name": "Graffiti",
+    "path": "../fast-neural-style/mymodels/5_30_8000/graffiti2.t7"
+  },
+  {
+    "name": "Picasso",
+    "path": "../fast-neural-style/mymodels/5_30_8000/picasso.t7"
+  },
+  {
+    "name": "Pineapple",
+    "path": "../fast-neural-style/mymodels/5_30_8000/pineapple.t7"
   }
   ],
   "sequence":
@@ -74,5 +98,15 @@
     {"name":"Leapord", "fadeIn": 1, "duration": 5, "strength": 0.5},
     {"name":"Lizard", "fadeIn": 1, "duration": 5, "strength": 0.7},
     {"name":"Feathers", "fadeIn": 1, "duration": 5, "strength": 0.6}
+  ],
+  "sequencePsy":
+  [
+    {"name":"AlexGrey", "fadeIn": 1, "duration": 5, "strength": 0.5},
+    {"name":"Triangle", "fadeIn": 1, "duration": 5, "strength": 0.7},
+    {"name":"Cat", "fadeIn": 1, "duration": 5, "strength": 0.6},
+    {"name":"Graffiti", "fadeIn": 1, "duration": 5, "strength": 0.6},
+    {"name":"Picasso", "fadeIn": 1, "duration": 5, "strength": 0.6},
+    {"name":"Gattaca", "fadeIn": 1, "duration": 5, "strength": 0.6},
+    {"name":"Pineapple", "fadeIn": 1, "duration": 5, "strength": 0.6}
   ]
 }
