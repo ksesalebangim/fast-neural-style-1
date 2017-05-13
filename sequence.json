@@ -116,7 +116,7 @@
     {"name":"Muscle", "fadeIn": 5, "duration": 29, "strength": 0.8},
     {"name":"Elephant", "fadeIn": 5, "duration": 29, "strength": 0.8}
   ],
-  "sequence":
+  "sequenceOld":
   [
     {"name":"Fire", "fadeIn": 6, "duration": 30, "strength": 0.5},
     {"name":"Water", "fadeIn": 6, "duration": 30, "strength": 0.7},
@@ -127,5 +127,11 @@
     {"name":"AlexGrey", "fadeIn": 5, "duration": 29, "strength": 0.8},
     {"name":"Picasso", "fadeIn": 5, "duration": 29, "strength": 0.8},
     {"name":"Pineapple", "fadeIn": 5, "duration": 29, "strength": 0.8}
+  ],
+  "sequence":
+  [
+    {"name":"Leapord", "fadeIn": 1, "duration": 5, "strength": 0.5},
+    {"name":"Lizard", "fadeIn": 1, "duration": 5, "strength": 0.7},
+    {"name":"Feathers", "fadeIn": 1, "duration": 5, "strength": 0.6}
   ]
 }
