@@ -4,6 +4,7 @@ local model_loader = require "model_loader"
 
 local M = {}
 local models = {}
+local currentEffectIndex = 0
 local sequence = {}
 local timer = torch.Timer()
 
@@ -36,7 +37,7 @@ end
 
 local function next()
   timer:reset()
-  local currentEffectIndex = (currentEffectIndex+1) % #sequence
+  currentEffectIndex = (currentEffectIndex+1) % #sequence
   local currentEffect = sequence[currentEffectIndex+1]
   print("Moving to " .. currentEffect.name)
 end
