@@ -9,6 +9,8 @@ require 'nn'
 require 'image'
 require 'camera'
 
+local http_worker = require 'http_worker'
+
 require 'qt'
 require 'qttorch'
 require 'qtwidget'
@@ -23,6 +25,8 @@ local model_loader = require 'model_loader'
 local sequence_loader = require 'sequence_loader'
 
 local cmd = torch.CmdLine()
+
+local SERVER_URL = 'http://localhost:5000/'
 
 -- Model options
 cmd:option('-models', 'models/instance_norm/candy.t7,models/instance_norm/la_muse.t7')
@@ -69,6 +73,7 @@ local function main()
       manual_mode = false
     elseif n == 'Key_P' then
       print('Take picture')
+      http_worker.request(SERVER_URL .. "screenshot")
     elseif n == 'Key_Up' then
       print('Increase Effect ' .. manual_camera_factor)
       manual_camera_factor = math.min(manual_camera_factor + 0.01, 1)
@@ -97,7 +102,8 @@ local function main()
   if model_names[2] == nil then
     model_names[2] = model_names[1]
   end
-
+  
+  http_worker.init()
   model_loader.init(dtype, use_cudnn)
   -- NOTE: MUST happen after model_loader.init()
   sequence_loader.init()

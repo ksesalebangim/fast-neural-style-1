@@ -208,6 +208,9 @@ You can install / update these packages by running:
 ```bash
 luarocks install camera
 luarocks install qtlua
+luarocks install json
+luarocks install luasocket
+luarocks install ipc
 ```
 
 The full set of options for this script is [described here](doc/flags.md#webcam_demolua).
