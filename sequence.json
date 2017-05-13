@@ -113,8 +113,7 @@
   ],
   "sequenceSkin":
   [
-    {"name":"Muscle", "fadeIn": 5, "duration": 29, "strength": 0.8},
-    {"name":"Elephant", "fadeIn": 5, "duration": 29, "strength": 0.8}
+    {"name":"Muscle", "fadeIn": 5, "duration": 29, "strength": 0.8}
   ],
   "sequenceOld":
   [
@@ -132,6 +131,7 @@
   [
     {"name":"Leapord", "fadeIn": 1, "duration": 5, "strength": 0.5},
     {"name":"Lizard", "fadeIn": 1, "duration": 5, "strength": 0.7},
-    {"name":"Feathers", "fadeIn": 1, "duration": 5, "strength": 0.6}
+    {"name":"Feathers", "fadeIn": 1, "duration": 5, "strength": 0.6},
+    {"name":"Elephant", "fadeIn": 5, "duration": 29, "strength": 0.8}
   ]
 }
