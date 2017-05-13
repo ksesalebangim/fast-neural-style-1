@@ -120,14 +120,14 @@
     {"name":"Fire", "fadeIn": 3, "duration": 10, "strength": 0.5},
     {"name":"Water", "fadeIn": 3, "duration": 10, "strength": 0.7},
     {"name":"Earth", "fadeIn": 3, "duration": 10, "strength": 0.6},
-    {"name":"Wind", "fadeIn": 3, "duration": 10, "strength": 0.6},
     {"name":"AlexGrey", "fadeIn": 3, "duration": 10, "strength": 0.8},
     {"name":"Triangle", "fadeIn": 3, "duration": 10, "strength": 0.7},
     {"name":"Cat", "fadeIn": 3, "duration": 10, "strength": 0.7},
     {"name":"Graffiti", "fadeIn": 3, "duration": 10, "strength": 0.7},
     {"name":"Picasso", "fadeIn": 3, "duration": 10, "strength": 0.7},
     {"name":"Gattaca", "fadeIn": 3, "duration": 10, "strength": 0.7},
-    {"name":"Pineapple", "fadeIn": 3, "duration": 10, "strength": 0.7}
+    {"name":"Pineapple", "fadeIn": 3, "duration": 10, "strength": 0.7},
+    {"name":"Wind", "fadeIn": 8, "duration": 180, "strength": 0.6},
   ],
   "sequenceAnimals":
   [
