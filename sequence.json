@@ -115,19 +115,21 @@
   [
     {"name":"Muscle", "fadeIn": 5, "duration": 29, "strength": 0.8}
   ],
-  "sequenceOld":
+  "sequence":
   [
     {"name":"Fire", "fadeIn": 6, "duration": 30, "strength": 0.5},
     {"name":"Water", "fadeIn": 6, "duration": 30, "strength": 0.7},
     {"name":"Earth", "fadeIn": 6, "duration": 30, "strength": 0.6},
     {"name":"Wind", "fadeIn": 6, "duration": 30, "strength": 0.6},
-    {"name":"RoundLetterWork", "fadeIn": 5, "duration": 20, "strength": 0.5},
-    {"name":"Styledwind", "fadeIn": 5, "duration": 20, "strength": 0.7},
     {"name":"AlexGrey", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Triangle", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Cat", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Graffiti", "fadeIn": 5, "duration": 29, "strength": 0.8},
     {"name":"Picasso", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Gattaca", "fadeIn": 5, "duration": 29, "strength": 0.8},
     {"name":"Pineapple", "fadeIn": 5, "duration": 29, "strength": 0.8}
   ],
-  "sequence":
+  "sequenceAnimals":
   [
     {"name":"Leapord", "fadeIn": 4, "duration": 20, "strength": 0.5},
     {"name":"Lizard", "fadeIn": 4, "duration": 20, "strength": 0.7},
