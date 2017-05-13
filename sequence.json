@@ -67,11 +67,11 @@
   },
   {
     "name": "Titan",
-    "path": "../fast-neural-style/mymodels/5_30_8000/titan_512_cw_2_sw_25"
+    "path": "../fast-neural-style/mymodels/5_30_8000/titan_512_cw_2_sw_25.t7"
   },
   {
     "name": "Elephant",
-    "path": "../fast-neural-style/mymodels/5_30_8000/elephantSkin"
+    "path": "../fast-neural-style/mymodels/5_30_8000/elephantSkin.t7"
   }
   ],
   "sequencewindfire":
