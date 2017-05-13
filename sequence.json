@@ -42,7 +42,7 @@
     "path": "../fast-neural-style/mymodels/5_30_8000/60116643-abstract-seamless-feathers-pattern-white-feathers-with-black-outline-feather-on-white-background.t7"
   }
   ],
-  "sequence":
+  "sequencewindfire":
   [
     {"name":"Fire", "fadeIn": 6, "duration": 30, "strength": 0.5},
     {"name":"Water", "fadeIn": 6, "duration": 30, "strength": 0.7},
@@ -65,14 +65,21 @@
   ],
   "sequencePatterns":
   [
-    {"name":"RoundLetterWork", "fadeIn": 1, "duration": 5, "strength": 0.5},
-    {"name":"Styledwind", "fadeIn": 1, "duration": 5, "strength": 0.7},
-    {"name":"Gattaca", "fadeIn": 1, "duration": 5, "strength": 0.6}
+    {"name":"RoundLetterWork", "fadeIn": 5, "duration": 20, "strength": 0.5},
+    {"name":"Styledwind", "fadeIn": 5, "duration": 20, "strength": 0.7},
+    {"name":"Gattaca", "fadeIn": 5, "duration": 20, "strength": 0.6}
   ],
-  "sequenceAnimals":
+  "sequence":
   [
-    {"name":"Leapord", "fadeIn": 1, "duration": 5, "strength": 0.5},
-    {"name":"Lizard", "fadeIn": 1, "duration": 5, "strength": 0.7},
-    {"name":"Feathers", "fadeIn": 1, "duration": 5, "strength": 0.6}
+    {"name":"Leapord", "fadeIn": 5, "duration": 20, "strength": 0.5},
+    {"name":"Lizard", "fadeIn": 5, "duration": 20, "strength": 0.7},
+    {"name":"Feathers", "fadeIn": 5, "duration": 20, "strength": 0.6},
+    {"name":"RoundLetterWork", "fadeIn": 5, "duration": 20, "strength": 0.5},
+    {"name":"Styledwind", "fadeIn": 5, "duration": 20, "strength": 0.7},
+    {"name":"Gattaca", "fadeIn": 5, "duration": 20, "strength": 0.6},
+    {"name":"Fire", "fadeIn": 6, "duration": 30, "strength": 0.5},
+    {"name":"Water", "fadeIn": 6, "duration": 30, "strength": 0.7},
+    {"name":"Earth", "fadeIn": 6, "duration": 30, "strength": 0.6},
+    {"name":"Wind", "fadeIn": 6, "duration": 30, "strength": 0.6}
   ]
 }
