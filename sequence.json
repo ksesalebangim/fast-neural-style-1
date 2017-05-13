@@ -64,6 +64,14 @@
   {
     "name": "Pineapple",
     "path": "../fast-neural-style/mymodels/5_30_8000/pineapple.t7"
+  },
+  {
+    "name": "Titan",
+    "path": "../fast-neural-style/mymodels/5_30_8000/titan_512_cw_2_sw_25"
+  },
+  {
+    "name": "Elephant",
+    "path": "../fast-neural-style/mymodels/5_30_8000/elephantSkin"
   }
   ],
   "sequencewindfire":
@@ -103,6 +111,11 @@
     {"name":"Gattaca", "fadeIn": 5, "duration": 29, "strength": 0.8},
     {"name":"Pineapple", "fadeIn": 5, "duration": 29, "strength": 0.8}
   ],
+  "sequenceSkin":
+  [
+    {"name":"Titan", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Elephant", "fadeIn": 5, "duration": 29, "strength": 0.8}
+  ],
   "sequence":
   [
     {"name":"AlexGrey", "fadeIn": 5, "duration": 29, "strength": 0.8},
@@ -111,6 +124,8 @@
     {"name":"Graffiti", "fadeIn": 5, "duration": 29, "strength": 0.8},
     {"name":"Picasso", "fadeIn": 5, "duration": 29, "strength": 0.8},
     {"name":"Gattaca", "fadeIn": 5, "duration": 29, "strength": 0.8},
-    {"name":"Pineapple", "fadeIn": 5, "duration": 29, "strength": 0.8}
+    {"name":"Pineapple", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Titan", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Elephant", "fadeIn": 5, "duration": 29, "strength": 0.8}
   ]
 }
