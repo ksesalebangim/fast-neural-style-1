@@ -3,8 +3,6 @@ require "torch"
 local model_loader = require "model_loader"
 
 local M = {}
-local currentEffectIndex = 0
-local currentEffect = nil
 local models = {}
 local sequence = {}
 local timer = torch.Timer()
@@ -38,18 +36,18 @@ end
 
 local function next()
   timer:reset()
-  currentEffectIndex = (currentEffectIndex+1) % #sequence
-  currentEffect = sequence[currentEffectIndex+1]
+  local currentEffectIndex = (currentEffectIndex+1) % #sequence
+  local currentEffect = sequence[currentEffectIndex+1]
   print("Moving to " .. currentEffect.name)
 end
 
 local function getCurrent()
-  currentEffect = sequence[currentEffectIndex+1]
+  local currentEffect = sequence[currentEffectIndex+1]
   return models[currentEffect.name], currentEffect.fadeIn, currentEffect.duration, currentEffect.strength
 end
 
 local function getNext()
-  currentEffect = sequence[((currentEffectIndex + 1) % #sequence) + 1]
+  local currentEffect = sequence[((currentEffectIndex + 1) % #sequence) + 1]
   return models[currentEffect.name], currentEffect.fadeIn, currentEffect.duration, currentEffect.strength
 end
 
