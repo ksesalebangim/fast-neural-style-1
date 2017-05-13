@@ -126,6 +126,6 @@
     {"name":"Styledwind", "fadeIn": 5, "duration": 20, "strength": 0.7},
     {"name":"AlexGrey", "fadeIn": 5, "duration": 29, "strength": 0.8},
     {"name":"Picasso", "fadeIn": 5, "duration": 29, "strength": 0.8},
-    {"name":"Pineapple", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Pineapple", "fadeIn": 5, "duration": 29, "strength": 0.8}
   ]
 }
