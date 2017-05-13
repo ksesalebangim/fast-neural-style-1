@@ -1,12 +1,14 @@
 #!flask/bin/python
 from flask import Flask
 import sound2
-from bleBulb import *
+#from bleBulb import *
 from led2 import *
 import re
 import pyscreenshot as ImageGrab
 import time
 import os
+import threading
+import subprocess
 global basePath
 basePath = os.path.dirname(os.path.realpath(__file__))
 basePath = basePath+"/"
@@ -17,7 +19,30 @@ mixer = sound2.myMixer(basePath+"sounds/")
 #bulb=bleBulb("74:DA:EA:91:0B:84")
 global strip
 #strip = myled()
+
+global mytimer
+mytimer = int(time.time())
+global threadEvent
+threadEvent = threading.Event()
+threadEvent.clear()
+
+
+
+def shutdown_server():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+shutdown_server()
+time.sleep(2)
 app = Flask(__name__)
+def watchdogLoop():
+    while threadEvent.is_set():
+        if mytimer + 3 < int(time.time()):
+            p = subprocess.Popen(['killall','qlua'], stdout=subprocess.PIPE,
+                                 stderr=subprocess.PIPE)
+            out, err = p.communicate()
+            threadEvent.clear()
 
 @app.route('/')
 def index():
@@ -52,6 +77,40 @@ def stopSound(fileName):
 def fadeOut(fileName,fadeOutMS):
     mixer.fadeOut(str(fileName),fadeOutMS)
     return fileName
+
+@app.route('/watchdog')
+def watchdog():
+    mytimer = int(time.time())
+    return str(mytimer)
+
+@app.route('/startWatchdog')
+def startWatchdog():
+    p = subprocess.Popen(["wmctrl" ,"-r" ,"image.display", "-b" ,"add,fullscreen,above"], stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+    out, err = p.communicate()
+    threadEvent.set()
+    threading.Thread(target=watchdogLoop).start()
+    return str("true")
+
+@app.route('/killall')
+def killall():
+    threadEvent.clear()
+    p = subprocess.Popen(['service', 'supervisor','stop'], stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+    out, err = p.communicate()
+    p = subprocess.Popen(['killall', 'qlua'], stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+    out, err = p.communicate()
+
+    shutdown_server()
+
+    p = subprocess.Popen(['killall', 'sudo'], stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+    out, err = p.communicate()
+    p = subprocess.Popen(['killall', 'python'], stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+    out, err = p.communicate()
+
 """
 @app.route('/setColor/<r>/<g>/<b>')
 def setColor(r,g,b):
@@ -63,8 +122,12 @@ def connectBulb():
     bulb.connect()
     return "connected"
 """
+
+
+
 if __name__ == '__main__':
 
     #func = request.environ.get('werkzeug.server.shutdown')
     #func()
     app.run(debug=True)
+
