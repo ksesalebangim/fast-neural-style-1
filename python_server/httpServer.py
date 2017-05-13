@@ -19,12 +19,23 @@ mixer = sound2.myMixer(basePath+"sounds/")
 #bulb=bleBulb("74:DA:EA:91:0B:84")
 global strip
 #strip = myled()
-app = Flask(__name__)
+
 global mytimer
 mytimer = int(time.time())
 global threadEvent
 threadEvent = threading.Event()
 threadEvent.clear()
+
+
+
+def shutdown_server():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+shutdown_server()
+time.sleep(2)
+app = Flask(__name__)
 def watchdogLoop():
     while threadEvent.is_set():
         if mytimer + 3 < int(time.time()):

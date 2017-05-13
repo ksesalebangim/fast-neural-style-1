@@ -35,8 +35,8 @@
       <file leaf-file-name="httpServer.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/httpServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="76" column="21" lean-forward="false" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
+            <state relative-caret-position="667">
+              <caret line="36" column="13" lean-forward="true" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
               <folding>
                 <element signature="e#19#42#0" expanded="true" />
               </folding>
@@ -438,22 +438,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/httpServer.py</url>
-          <line>88</line>
+          <line>99</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/httpServer.py</url>
-          <line>41</line>
+          <line>52</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/httpServer.py</url>
-          <line>50</line>
+          <line>61</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/httpServer.py</url>
-          <line>44</line>
+          <line>55</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
@@ -813,8 +813,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/httpServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="76" column="21" lean-forward="false" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
+        <state relative-caret-position="667">
+          <caret line="36" column="13" lean-forward="true" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
           <folding>
             <element signature="e#19#42#0" expanded="true" />
           </folding>
