@@ -85,7 +85,7 @@ def watchdog():
 
 @app.route('/startWatchdog')
 def startWatchdog():
-    p = subprocess.Popen(["wmctrl" ,"-r" ,"image.display", "-b" ,"add,fullscreen"], stdout=subprocess.PIPE,
+    p = subprocess.Popen(["wmctrl" ,"-r" ,"image.display", "-b" ,"add,fullscreen,above"], stdout=subprocess.PIPE,
                          stderr=subprocess.PIPE)
     out, err = p.communicate()
     threadEvent.set()

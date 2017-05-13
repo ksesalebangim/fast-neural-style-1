@@ -35,8 +35,8 @@
       <file leaf-file-name="httpServer.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/httpServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="87" column="33" lean-forward="false" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="33" />
+            <state relative-caret-position="468">
+              <caret line="98" column="48" lean-forward="true" selection-start-line="98" selection-start-column="48" selection-end-line="98" selection-end-column="48" />
               <folding>
                 <element signature="e#19#42#0" expanded="true" />
               </folding>
@@ -813,8 +813,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/httpServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="87" column="33" lean-forward="false" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="33" />
+        <state relative-caret-position="468">
+          <caret line="98" column="48" lean-forward="true" selection-start-line="98" selection-start-column="48" selection-end-line="98" selection-end-column="48" />
           <folding>
             <element signature="e#19#42#0" expanded="true" />
           </folding>
