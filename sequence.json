@@ -127,7 +127,7 @@
     {"name":"Picasso", "fadeIn": 3, "duration": 10, "strength": 0.7},
     {"name":"Gattaca", "fadeIn": 3, "duration": 10, "strength": 0.7},
     {"name":"Pineapple", "fadeIn": 3, "duration": 10, "strength": 0.7},
-    {"name":"Wind", "fadeIn": 8, "duration": 180, "strength": 0.6},
+    {"name":"Wind", "fadeIn": 8, "duration": 180, "strength": 0.6}
   ],
   "sequenceAnimals":
   [
