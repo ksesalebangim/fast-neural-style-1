@@ -101,12 +101,12 @@
   ],
   "sequencePsy":
   [
-    {"name":"AlexGrey", "fadeIn": 1, "duration": 5, "strength": 0.5},
-    {"name":"Triangle", "fadeIn": 1, "duration": 5, "strength": 0.7},
-    {"name":"Cat", "fadeIn": 1, "duration": 5, "strength": 0.6},
-    {"name":"Graffiti", "fadeIn": 1, "duration": 5, "strength": 0.6},
-    {"name":"Picasso", "fadeIn": 1, "duration": 5, "strength": 0.6},
-    {"name":"Gattaca", "fadeIn": 1, "duration": 5, "strength": 0.6},
-    {"name":"Pineapple", "fadeIn": 1, "duration": 5, "strength": 0.6}
+    {"name":"AlexGrey", "fadeIn": 3, "duration": 8, "strength": 0.5},
+    {"name":"Triangle", "fadeIn": 3, "duration": 8, "strength": 0.7},
+    {"name":"Cat", "fadeIn": 3, "duration": 8, "strength": 0.6},
+    {"name":"Graffiti", "fadeIn": 3, "duration": 8, "strength": 0.6},
+    {"name":"Picasso", "fadeIn": 3, "duration": 8, "strength": 0.6},
+    {"name":"Gattaca", "fadeIn": 3, "duration": 8, "strength": 0.6},
+    {"name":"Pineapple", "fadeIn": 3, "duration": 8, "strength": 0.6}
   ]
 }
