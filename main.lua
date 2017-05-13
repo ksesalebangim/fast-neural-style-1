@@ -44,6 +44,69 @@ cmd:option('-webcam_idx', 0)
 cmd:option('-webcam_fps', 60)
 
 
+
+
+local function dox(img_disp,startx,endx,buffer)
+  r=0
+  g=0
+  b=0
+  size=1
+  for x=startx,endx do
+    r=r+img_disp[1][buffer][x]
+    g=g+img_disp[2][buffer][x]
+    b=b+img_disp[3][buffer][x]
+    size=size+1
+  end
+  r=math.floor(255*(r/size))
+  g=math.floor(255*(g/size))
+  b=math.floor(255*(b/size))
+  return r..","..g..","..b
+end
+local function doy(img_disp,starty,endy,buffer)
+  r=0
+  g=0
+  b=0
+  size=1
+  for x=starty,endy do
+    r=r+img_disp[1][x][buffer]
+    g=g+img_disp[2][x][buffer]
+    b=b+img_disp[3][x][buffer]
+    size=size+1
+  end
+  r=math.floor(255*(r/size))
+  g=math.floor(255*(g/size))
+  b=math.floor(255*(b/size))
+  return r..","..g..","..b
+end
+
+local function getLedString(img_disp,width,height,ledsx,ledsy)
+  local cunkx = width / ledsx
+  local cunky = height / ledsy
+  local loc =1
+  local out = ""
+  for x=1,ledsx do
+    out=out..loc..","..(dox(img_disp,((x-1)*cunkx)+1,x*cunkx,25))..","
+    loc=loc+1
+  end
+  for y=1,ledsy do
+    out=out..loc..","..(doy(img_disp,((y-1)*cunky)+1,y*cunky,275))..","
+    loc=loc+1
+  end
+  for x=ledsx,1,-1 do
+    out=out..loc..","..(dox(img_disp,((x-1)*cunkx)+1,x*cunkx,275))..","
+    loc=loc+1
+  end
+  for y=ledsy,1,-1 do
+    out=out..loc..","..(doy(img_disp,((y-1)*cunky)+1,y*cunky,25))..","
+    loc=loc+1
+  end
+  return out
+end
+
+
+
+
+
 local function main()
   local quit = false
   local manual_mode = false

@@ -215,7 +215,7 @@ local function main()
 
     if not win then
       -- On the first call use image.display to construct a window
-      win = image.display(img_disp)
+      win = image.display(img_disp,1920,1080)
       -- make draw scale with bilinear filter
       win.painter:sethints("SmoothPixmapTransform")
       --listener = qt.QtLuaListener(win.window)
