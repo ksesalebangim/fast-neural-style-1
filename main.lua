@@ -66,8 +66,12 @@ local function main()
     if n == 'Key_Escape' then
       print('escape detected!')
       quit=true
+    elseif n == 'Key_N' then
+      print('Next effect with cooldown!')
+      sequence_loader.next()
     elseif n == 'Key_Space' then
       print('Next effect')
+      sequence_loader.next()
     elseif n == 'Key_S' then
       print('Toggle Story mode')
       manual_mode = false
@@ -102,8 +106,7 @@ local function main()
   if model_names[2] == nil then
     model_names[2] = model_names[1]
   end
-  
-  http_worker.init()
+
   model_loader.init(dtype, use_cudnn)
   -- NOTE: MUST happen after model_loader.init()
   sequence_loader.init()
