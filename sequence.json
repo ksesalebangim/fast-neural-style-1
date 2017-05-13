@@ -16,6 +16,30 @@
   {
     "name": "Wind",
     "path": "../fast-neural-style/mymodels/5_30_8000/windswirlslight.t7"
+  },
+  {
+    "name": "RoundLetterWork",
+    "path": "../fast-neural-style/mymodels/5_30_8000/roundLetterWork.t7"
+  },
+  {
+    "name": "Styledwind",
+    "path": "../fast-neural-style/mymodels/5_30_8000/styledwind.t7"
+  },
+  {
+    "name": "Gattaca",
+    "path": "../fast-neural-style/mymodels/5_30_8000/90774272.t7"
+  },
+  {
+    "name": "Leapord",
+    "path": "../fast-neural-style/mymodels/5_30_8000/leapordprint.t7"
+  },
+  {
+    "name": "Lizard",
+    "path": "../fast-neural-style/mymodels/5_30_8000/lizardhead.t7"
+  },
+  {
+    "name": "Feathers",
+    "path": "../fast-neural-style/mymodels/5_30_8000/60116643-abstract-seamless-feathers-pattern-white-feathers-with-black-outline-feather-on-white-background.t7"
   }
   ],
   "sequence":
@@ -24,5 +48,17 @@
     {"name":"Water", "fadeIn": 1, "duration": 5, "strength": 0.7},
     {"name":"Earth", "fadeIn": 1, "duration": 5, "strength": 0.6},
     {"name":"Wind", "fadeIn": 1, "duration": 5, "strength": 0.6}
+  ],
+  "sequencePatterns":
+  [
+    {"name":"RoundLetterWork", "fadeIn": 1, "duration": 5, "strength": 0.5},
+    {"name":"Styledwind", "fadeIn": 1, "duration": 5, "strength": 0.7},
+    {"name":"Gattaca", "fadeIn": 1, "duration": 5, "strength": 0.6}
+  ],
+  "sequenceAnimals":
+  [
+    {"name":"Leapord", "fadeIn": 1, "duration": 5, "strength": 0.5},
+    {"name":"Lizard", "fadeIn": 1, "duration": 5, "strength": 0.7},
+    {"name":"Feathers", "fadeIn": 1, "duration": 5, "strength": 0.6}
   ]
 }
