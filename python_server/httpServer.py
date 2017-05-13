@@ -29,10 +29,13 @@ threadEvent.clear()
 
 
 def shutdown_server():
-    func = request.environ.get('werkzeug.server.shutdown')
-    if func is None:
-        raise RuntimeError('Not running with the Werkzeug Server')
-    func()
+    try:
+        func = request.environ.get('werkzeug.server.shutdown')
+        if func is None:
+            raise RuntimeError('Not running with the Werkzeug Server')
+        func()
+    except Exception as e:
+        pass
 shutdown_server()
 time.sleep(2)
 app = Flask(__name__)
