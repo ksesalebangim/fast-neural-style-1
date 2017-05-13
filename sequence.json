@@ -1,23 +1,28 @@
 {
   "models": 
-  [{
-    "name": "None",
-    "path": "/dev/null"
+  [
+  {
+    "name": "Fire",
+    "path": "../fast-neural-style/mymodels/5_30_8000/fireCropped2.t7"
   },
   {
-    "name": "Vangoch",
-    "path": "/asdfasdf/vangoch"
+    "name": "Water",
+    "path": "../fast-neural-style/mymodels/5_30_8000/waterfire.t7"
   },
   {
-    "name": "Kandinski",
-    "path": "/asdfasdf/kandinski"
+    "name": "Earth",
+    "path": "../fast-neural-style/mymodels/5_30_8000/earthpeel.t7"
+  },
+  {
+    "name": "Wind",
+    "path": "../fast-neural-style/mymodels/5_30_8000/windswirlslight.t7"
   }
   ],
   "sequence":
   [
-    {"name":"Vangoch", "fadeIn": 1, "duration": 20, "strength": 0.5},
-    {"name":"Kandinski", "fadeIn": 1, "duration": 20, "strength": 1},
-    {"name":"Kandinski", "fadeIn": 1, "duration": 20, "strength": 0.2},
-    {"name":"Vangoch", "fadeIn": 1, "duration": 10, "strength": 0.6}
+    {"name":"Fire", "fadeIn": 1, "duration": 5, "strength": 0.5},
+    {"name":"Water", "fadeIn": 1, "duration": 5, "strength": 0.7},
+    {"name":"Earth", "fadeIn": 1, "duration": 5, "strength": 0.6},
+    {"name":"Wind", "fadeIn": 1, "duration": 5, "strength": 0.6}
   ]
 }
