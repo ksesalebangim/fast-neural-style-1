@@ -1,5 +1,6 @@
-local cv = require 'cv'
-require 'cv.imgproc'
+-- TODO: uncomment top two lines
+--local cv = require 'cv'
+--require 'cv.imgproc'
 --require 'cv.cudafilters'
 
 require 'math'
@@ -41,7 +42,10 @@ cmd:option('-use_cudnn', 1)
 -- Webcam options
 cmd:option('-webcam_idx', 0)
 cmd:option('-webcam_fps', 60)
+
+-- Sequence control
 cmd:option('-sequence','sequence')
+cmd:option('-seqfile','sequence.json')
 
 
 
@@ -109,6 +113,7 @@ end
 local function main()
   local quit = false
   local manual_mode = false
+  sequence_loader.set_manual_mode(manual_mode)
   local manual_factor = 0.5
   local manual_camera_factor = 0.5 
   local manual_timer = torch.Timer()
@@ -123,6 +128,7 @@ local function main()
     if not manual_mode then
       print('Key detected - Entering Manual Mode')
       manual_mode = true
+      sequence_loader.set_manual_mode(manual_mode)
     end
     manual_timer:reset()
 
@@ -135,6 +141,7 @@ local function main()
     elseif n == 'Key_S' then
       print('Toggle Story mode')
       manual_mode = false
+      sequence_loader.set_manual_mode(manual_mode)
     elseif n == 'Key_P' then
       print('Take picture')
       http_worker.request(SERVER_URL .. "screenshot")
@@ -169,7 +176,7 @@ local function main()
 
   model_loader.init(dtype, use_cudnn)
   -- NOTE: MUST happen after model_loader.init()
-  sequence_loader.init('sequence.json', opt.sequence)
+  sequence_loader.init(opt.seqfile, opt.sequence)
 
   --for _, checkpoint_path in ipairs(model_names) do
   --  table.insert(models, model_loader.load_model(checkpoint_path))
@@ -224,6 +231,7 @@ local function main()
     if(manual_mode and manual_timer:time().real > 60) then
        print('Idle detected - Entering Story Mode')
        manual_mode = false
+       sequence_loader.set_manual_mode(manual_mode)
     end
     -- Grab a frame from the webcam
     local img = cam:forward()
@@ -291,7 +299,8 @@ local function main()
     -- NOTE: convolve() runs only on the CPU :(
     --img_out = image.convolve(img_out, gaussian_kernel,'same')
     for i=1, 3 do
-      cv.GaussianBlur{src=img_out[i], ksize={7, 7}, sigmaX=0.8, dst=img_out[i], sigmaY=0.8 }
+      -- TODO: comment-in first line
+      --cv.GaussianBlur{src=img_out[i], ksize={7, 7}, sigmaX=0.8, dst=img_out[i], sigmaY=0.8 }
       -- crashes because this is a tensor slice and not a contiguous tensor. fix :(
       -- https://github.com/VisionLabs/torch-opencv/issues/104
       --gaussian_filter:apply{src=img_out[i], dst=img_out[i]}
