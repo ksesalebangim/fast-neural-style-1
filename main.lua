@@ -30,7 +30,6 @@ local SERVER_URL = 'http://localhost:5000/'
 
 -- Model options
 cmd:option('-models', 'models/instance_norm/candy.t7,models/instance_norm/la_muse.t7')
-cmd:option('-sequence', '')
 cmd:option('-height', 480)
 cmd:option('-width', 640)
 
@@ -42,7 +41,7 @@ cmd:option('-use_cudnn', 1)
 -- Webcam options
 cmd:option('-webcam_idx', 0)
 cmd:option('-webcam_fps', 60)
-
+cmd:option('-sequence','sequence')
 
 
 
@@ -170,7 +169,7 @@ local function main()
 
   model_loader.init(dtype, use_cudnn)
   -- NOTE: MUST happen after model_loader.init()
-  sequence_loader.init()
+  sequence_loader.init('sequence.json', opt.sequence)
 
   --for _, checkpoint_path in ipairs(model_names) do
   --  table.insert(models, model_loader.load_model(checkpoint_path))

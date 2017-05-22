@@ -22,7 +22,7 @@ local function loadModels(modelsObject)
   return models
 end
 
-local function init(fileName)
+local function init(fileName, sequenceName)
   if not fileName then
     fileName = 'sequence.json'
   end
@@ -32,7 +32,7 @@ local function init(fileName)
     local lines = Json.decode(content)
     io.close(file)
     models = loadModels(lines["models"])
-    sequence = lines["sequence"]
+    sequence = lines[sequenceName]
   end
 end
 

@@ -5,15 +5,6 @@
     "name": "Fire",
     "path": "../fast-neural-style/mymodels/5_30_8000/fireCropped2.t7"
   },
-{
-    "name": "Fire2",
-    "path": "../fast-neural-style/mymodels/5_30_8000/fireCropped3.t7"
-  },
-{
-    "name": "Fire3",
-    "path": "../fast-neural-style/mymodels/5_30_8000/fireCropped4.t7"
-  },
-
   {
     "name": "Water",
     "path": "../fast-neural-style/mymodels/5_30_8000/waterfire.t7"
@@ -37,6 +28,18 @@
   {
     "name": "Gattaca",
     "path": "../fast-neural-style/mymodels/5_30_8000/90774272.t7"
+  },
+  {
+    "name": "Leapord",
+    "path": "../fast-neural-style/mymodels/5_30_8000/leapordprint.t7"
+  },
+  {
+    "name": "Lizard",
+    "path": "../fast-neural-style/mymodels/5_30_8000/lizardhead.t7"
+  },
+  {
+    "name": "Feathers",
+    "path": "../fast-neural-style/mymodels/5_30_8000/60116643-abstract-seamless-feathers-pattern-white-feathers-with-black-outline-feather-on-white-background.t7"
   },
   {
     "name": "AlexGrey",
@@ -69,18 +72,9 @@
   {
     "name": "Elephant",
     "path": "../fast-neural-style/mymodels/5_30_8000/elephantSkin.t7"
-  },
-   {
-    "name": "Neon",
-    "path": "../fast-neural-style/mymodels/1_10_8000/3XvEI5N.t7"
-  },
-  {
-    "name": "Circuit",
-    "path": "../fast-neural-style/mymodels/1_10_8000/SIOCJ3.t7"
   }
-
- ],
-  "WindFire":
+  ],
+  "sequencewindfire":
   [
     {"name":"Fire", "fadeIn": 6, "duration": 30, "strength": 0.5},
     {"name":"Water", "fadeIn": 6, "duration": 30, "strength": 0.7},
@@ -90,15 +84,9 @@
   "sequenceWindVariation":
   [
     {"name":"Wind", "fadeIn": 6, "duration": 20, "strength": 0.8},
-    {"name":"Wind", "fadeIn": 4, "duration": 5, "strength": 0.2},
+    {"name":"Wind", "fadeIn": 10, "duration": 5, "strength": 0.2},
     {"name":"Wind", "fadeIn": 5, "duration": 30, "strength": 0.5},
     {"name":"Wind", "fadeIn": 5, "duration": 30, "strength": 1.0}
-  ],
-"fire":
-  [
-    {"name":"Fire", "fadeIn": 6, "duration": 20, "strength": 0.8},
-    {"name":"Fire2", "fadeIn": 4, "duration": 12, "strength": 0.8},
-    {"name":"Fire3", "fadeIn": 5, "duration": 30, "strength": 0.8}
   ],
   "sequenceWaiting":
   [
@@ -107,29 +95,27 @@
     {"name":"Wind", "fadeIn": 5, "duration": 30, "strength": 0.5},
     {"name":"Wind", "fadeIn": 5, "duration": 30, "strength": 1.0}
   ],
-  "Patterns":
+  "sequencePatterns":
   [
     {"name":"RoundLetterWork", "fadeIn": 5, "duration": 20, "strength": 0.5},
     {"name":"Styledwind", "fadeIn": 5, "duration": 20, "strength": 0.7},
-    {"name":"Gattaca", "fadeIn": 5, "duration": 20, "strength": 0.6},
-   {"name":"Circuit", "fadeIn": 5, "duration": 20, "strength": 0.8}
+    {"name":"Gattaca", "fadeIn": 5, "duration": 20, "strength": 0.6}
   ],
-  "psy":
+  "sequencePsy":
   [
-    {"name":"AlexGrey", "fadeIn": 10, "duration": 30, "strength": 0.5},
-    {"name":"AlexGrey", "fadeIn": 10, "duration": 30, "strength": 0.9},
-{"name":"Triangle", "fadeIn": 10, "duration": 40, "strength": 0.8},
-{"name":"Picasso", "fadeIn": 10, "duration": 40, "strength": 0.7},
-    {"name":"Cat", "fadeIn": 10, "duration": 60, "strength": 1},
-    {"name":"Graffiti", "fadeIn": 10, "duration": 60, "strength": 1}, 
-  {"name":"Neon", "fadeIn": 10, "duration": 29, "strength": 0.5} ,   {"name":"Neon", "fadeIn": 10, "duration": 29, "strength": 0.8}, {"name":"Gattaca", "fadeIn": 5, "duration": 29, "strength": 0.9},
-    {"name":"Pineapple", "fadeIn": 5, "duration": 20, "strength": 0.8}, {"name":"Pineapple", "fadeIn": 5, "duration": 20, "strength": 0.15},
-{"name":"Pineapple", "fadeIn": 5, "duration": 8, "strength": 0}],
+    {"name":"AlexGrey", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Triangle", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Cat", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Graffiti", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Picasso", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Gattaca", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Pineapple", "fadeIn": 5, "duration": 29, "strength": 0.8}
+  ],
   "sequenceSkin":
   [
     {"name":"Muscle", "fadeIn": 5, "duration": 29, "strength": 0.8}
   ],
-  "sequence_preburn":
+  "sequence":
   [
     {"name":"Fire", "fadeIn": 10, "duration": 20, "strength": 0.8},
     {"name":"Water", "fadeIn": 10, "duration": 20, "strength": 0.7},
@@ -143,7 +129,7 @@
     {"name":"Pineapple", "fadeIn": 10, "duration": 20, "strength": 0.7},
     {"name":"Wind", "fadeIn": 10, "duration": 20, "strength": 0.8}
   ],
-  "Animals":
+  "sequenceAnimals":
   [
     {"name":"Leapord", "fadeIn": 4, "duration": 20, "strength": 0.5},
     {"name":"Lizard", "fadeIn": 4, "duration": 20, "strength": 0.7},
