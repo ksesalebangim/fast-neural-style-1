@@ -85,8 +85,8 @@ local function fade_factor(fade)
     -- 100% first effect
     return 0
   end
-
-  return math.min(1.0,  (t - fade.duration) / fade.fade_time)
+  t = math.min(1.0,  (t - fade.duration) / fade.fade_time)
+  return t*(2*t - t*t)
 end
 
 local function is_fade_running(fade)
@@ -221,8 +221,14 @@ local function get_models()
   return current_fade.src_model, current_fade.dst_model, factor, current_fade.src_strength*factor + current_fade.dst_strength*(1 - factor)
 end
 
+local function close()
+  timer:stop()
+  sound_stop_all()
+end
+
 M.init = init
 M.next = next
 M.get_models = get_models
 M.set_manual_mode = set_manual_mode
+M.close = close
 return M

@@ -328,6 +328,7 @@ local function main()
     qt.doevents()
   end
   print("quitting")
+  sequence_loader.close()
   http_worker.close()
   cam:stop()
   print("stopped")
