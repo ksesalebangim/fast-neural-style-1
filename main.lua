@@ -1,5 +1,6 @@
-local cv = require 'cv'
-require 'cv.imgproc'
+-- TODO: uncomment top two lines
+--local cv = require 'cv'
+--require 'cv.imgproc'
 --require 'cv.cudafilters'
 
 require 'math'
@@ -8,6 +9,8 @@ require 'torch'
 require 'nn'
 require 'image'
 require 'camera'
+
+local http_worker = require 'http_worker'
 
 require 'qt'
 require 'qttorch'
@@ -20,8 +23,11 @@ local utils = require 'fast_neural_style.utils'
 local preprocess = require 'fast_neural_style.preprocess'
 
 local model_loader = require 'model_loader'
+local sequence_loader = require 'sequence_loader'
 
 local cmd = torch.CmdLine()
+
+local SERVER_URL = 'http://localhost:5000/'
 
 -- Model options
 cmd:option('-models', 'models/instance_norm/candy.t7,models/instance_norm/la_muse.t7')
@@ -37,23 +43,120 @@ cmd:option('-use_cudnn', 1)
 cmd:option('-webcam_idx', 0)
 cmd:option('-webcam_fps', 60)
 
+-- Sequence control
+cmd:option('-sequence','sequence')
+cmd:option('-seqfile','sequence.json')
+
+
+
+local function dox(img_disp,startx,endx,buffer)
+  r=0
+  g=0
+  b=0
+  size=1
+  for x=startx,endx do
+    r=r+img_disp[1][buffer][x]
+    g=g+img_disp[2][buffer][x]
+    b=b+img_disp[3][buffer][x]
+    size=size+1
+  end
+  r=math.floor(255*(r/size))
+  g=math.floor(255*(g/size))
+  b=math.floor(255*(b/size))
+  return r..","..g..","..b
+end
+local function doy(img_disp,starty,endy,buffer)
+  r=0
+  g=0
+  b=0
+  size=1
+  for x=starty,endy do
+    r=r+img_disp[1][x][buffer]
+    g=g+img_disp[2][x][buffer]
+    b=b+img_disp[3][x][buffer]
+    size=size+1
+  end
+  r=math.floor(255*(r/size))
+  g=math.floor(255*(g/size))
+  b=math.floor(255*(b/size))
+  return r..","..g..","..b
+end
+
+local function getLedString(img_disp,width,height,ledsx,ledsy)
+  local cunkx = width / ledsx
+  local cunky = height / ledsy
+  local loc =1
+  local out = ""
+  for x=1,ledsx do
+    out=out..loc..","..(dox(img_disp,((x-1)*cunkx)+1,x*cunkx,25))..","
+    loc=loc+1
+  end
+  for y=1,ledsy do
+    out=out..loc..","..(doy(img_disp,((y-1)*cunky)+1,y*cunky,275))..","
+    loc=loc+1
+  end
+  for x=ledsx,1,-1 do
+    out=out..loc..","..(dox(img_disp,((x-1)*cunkx)+1,x*cunkx,275))..","
+    loc=loc+1
+  end
+  for y=ledsy,1,-1 do
+    out=out..loc..","..(doy(img_disp,((y-1)*cunky)+1,y*cunky,25))..","
+    loc=loc+1
+  end
+  return out
+end
+
+
+
+
 
 local function main()
   local quit = false
+  local manual_mode = false
+  sequence_loader.set_manual_mode(manual_mode)
+  local manual_factor = 0.5
+  local manual_camera_factor = 0.5 
+  local manual_timer = torch.Timer()
+
   local function keypress(k,n)
+    if n == 'Key_N' then
+      print('Next effect with cooldown')
+      sequence_loader.next()
+      return
+    end
+    -- Any key but the N key sets manual mode
+    if not manual_mode then
+      print('Key detected - Entering Manual Mode')
+      manual_mode = true
+      sequence_loader.set_manual_mode(manual_mode)
+    end
+    manual_timer:reset()
+
     if n == 'Key_Escape' then
       print('escape detected!')
       quit=true
     elseif n == 'Key_Space' then
       print('Next effect')
-    elseif n == 'Key_s' then
+      sequence_loader.next()
+    elseif n == 'Key_S' then
       print('Toggle Story mode')
-    elseif n == 'Key_p' then
+      manual_mode = false
+      sequence_loader.set_manual_mode(manual_mode)
+    elseif n == 'Key_P' then
       print('Take picture')
+      http_worker.request(SERVER_URL .. "screenshot")
     elseif n == 'Key_Up' then
-      print('Increase Effect')
+      print('Increase Effect ' .. manual_camera_factor)
+      manual_camera_factor = math.min(manual_camera_factor + 0.01, 1)
     elseif n == 'Key_Down' then
-      print('Increase Reality')
+      print('Increase Reality ' .. manual_camera_factor)
+      manual_camera_factor = math.max(manual_camera_factor - 0.01, 0)
+    elseif n == 'Key_Right' then
+      print('Increase next effect' .. manual_factor)
+      manual_factor = math.min(manual_factor + 0.01, 1)
+    elseif n == 'Key_Left' then
+      print('Increase previous effect' .. manual_factor)
+      manual_factor = math.max(manual_factor - 0.01,  0)
     else
       print(k,n)
     end
@@ -63,19 +166,10 @@ local function main()
   local opt = cmd:parse(arg)
 
   local dtype, use_cudnn = utils.setup_gpu(opt.gpu, opt.backend, opt.use_cudnn == 1)
-  local opt_models = opt.models:split(',')
-  local model_names = {opt_models[1], opt_models[2]}
-  local models = {}
-  -- load same model twice if onyl one provided
-  if model_names[2] == nil then
-    model_names[2] = model_names[1]
-  end
 
   model_loader.init(dtype, use_cudnn)
-
-  for _, checkpoint_path in ipairs(model_names) do
-    table.insert(models, model_loader.load_model(checkpoint_path))
-  end
+  -- NOTE: MUST happen after model_loader.init()
+  sequence_loader.init(opt.seqfile, opt.sequence)
 
   local preprocess = preprocess[model_loader.get_preprocess_method()]
 
@@ -122,6 +216,12 @@ local function main()
   local win = nil
   local listener = nil
   while not quit do
+    -- Check if should return to manual mode (1 min of idle time)
+    if(manual_mode and manual_timer:time().real > 60) then
+       print('Idle detected - Entering Story Mode')
+       manual_mode = false
+       sequence_loader.set_manual_mode(manual_mode)
+    end
     -- Grab a frame from the webcam
     local img = cam:forward()
 
@@ -172,7 +272,11 @@ local function main()
 
 
     -- do linear blend
-    local model1, model2, factor, camera_factor = model_loader.get_models()
+    local model1, model2, factor, camera_factor = sequence_loader.get_models()
+    if(manual_mode) then
+      factor = manual_factor
+      camera_factor = manual_camera_factor
+    end
 
     local blend_img = model1:forward(img_pre):mul(factor)
     blend_img:add(1 - factor, model2:forward(img_pre))
@@ -184,7 +288,8 @@ local function main()
     -- NOTE: convolve() runs only on the CPU :(
     --img_out = image.convolve(img_out, gaussian_kernel,'same')
     for i=1, 3 do
-      cv.GaussianBlur{src=img_out[i], ksize={7, 7}, sigmaX=0.8, dst=img_out[i], sigmaY=0.8 }
+      -- TODO: comment-in first line
+      --cv.GaussianBlur{src=img_out[i], ksize={7, 7}, sigmaX=0.8, dst=img_out[i], sigmaY=0.8 }
       -- crashes because this is a tensor slice and not a contiguous tensor. fix :(
       -- https://github.com/VisionLabs/torch-opencv/issues/104
       --gaussian_filter:apply{src=img_out[i], dst=img_out[i]}

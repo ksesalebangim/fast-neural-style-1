@@ -1,0 +1,139 @@
+{
+  "models": 
+  [
+  {
+    "name": "Fire",
+    "path": "../fast-neural-style/mymodels/5_30_8000/fireCropped2.t7"
+  },
+  {
+    "name": "Water",
+    "path": "../fast-neural-style/mymodels/5_30_8000/waterfire.t7"
+  },
+  {
+    "name": "Earth",
+    "path": "../fast-neural-style/mymodels/5_30_8000/earthpeel.t7"
+  },
+  {
+    "name": "Wind",
+    "path": "../fast-neural-style/mymodels/5_30_8000/windswirlslight.t7"
+  },
+  {
+    "name": "RoundLetterWork",
+    "path": "../fast-neural-style/mymodels/5_30_8000/roundLetterWork.t7"
+  },
+  {
+    "name": "Styledwind",
+    "path": "../fast-neural-style/mymodels/5_30_8000/styledwind.t7"
+  },
+  {
+    "name": "Gattaca",
+    "path": "../fast-neural-style/mymodels/5_30_8000/90774272.t7"
+  },
+  {
+    "name": "Leapord",
+    "path": "../fast-neural-style/mymodels/5_30_8000/leapordprint.t7"
+  },
+  {
+    "name": "Lizard",
+    "path": "../fast-neural-style/mymodels/5_30_8000/lizardhead.t7"
+  },
+  {
+    "name": "Feathers",
+    "path": "../fast-neural-style/mymodels/5_30_8000/60116643-abstract-seamless-feathers-pattern-white-feathers-with-black-outline-feather-on-white-background.t7"
+  },
+  {
+    "name": "AlexGrey",
+    "path": "../fast-neural-style/mymodels/5_30_8000/alexgrayeyes3.t7"
+  },
+  {
+    "name": "Triangle",
+    "path": "../fast-neural-style/mymodels/5_30_8000/trianglePattern.t7"
+  },
+  {
+    "name": "Cat",
+    "path": "../fast-neural-style/mymodels/5_30_8000/cat.t7"
+  },
+  {
+    "name": "Graffiti",
+    "path": "../fast-neural-style/mymodels/5_30_8000/graffiti2.t7"
+  },
+  {
+    "name": "Picasso",
+    "path": "../fast-neural-style/mymodels/5_30_8000/picasso.t7"
+  },
+  {
+    "name": "Pineapple",
+    "path": "../fast-neural-style/mymodels/5_30_8000/pineapple.t7"
+  },
+  {
+    "name": "Muscle",
+    "path": "../fast-neural-style/midburnmodels/titan_512_cw_2_sw_25.t7"
+  },
+  {
+    "name": "Elephant",
+    "path": "../fast-neural-style/mymodels/5_30_8000/elephantSkin.t7"
+  }
+  ],
+  "sequencewindfire":
+  [
+    {"name":"Fire", "fadeIn": 6, "duration": 30, "strength": 0.5},
+    {"name":"Water", "fadeIn": 6, "duration": 30, "strength": 0.7},
+    {"name":"Earth", "fadeIn": 6, "duration": 30, "strength": 0.6},
+    {"name":"Wind", "fadeIn": 6, "duration": 30, "strength": 0.6}
+  ],
+  "sequenceWindVariation":
+  [
+    {"name":"Wind", "fadeIn": 6, "duration": 20, "strength": 0.8},
+    {"name":"Wind", "fadeIn": 10, "duration": 5, "strength": 0.2},
+    {"name":"Wind", "fadeIn": 5, "duration": 30, "strength": 0.5},
+    {"name":"Wind", "fadeIn": 5, "duration": 30, "strength": 1.0}
+  ],
+  "sequenceWaiting":
+  [
+    {"name":"Wind", "fadeIn": 6, "duration": 20, "strength": 0.8},
+    {"name":"Wind", "fadeIn": 10, "duration": 5, "strength": 0.2},
+    {"name":"Wind", "fadeIn": 5, "duration": 30, "strength": 0.5},
+    {"name":"Wind", "fadeIn": 5, "duration": 30, "strength": 1.0}
+  ],
+  "sequencePatterns":
+  [
+    {"name":"RoundLetterWork", "fadeIn": 5, "duration": 20, "strength": 0.5},
+    {"name":"Styledwind", "fadeIn": 5, "duration": 20, "strength": 0.7},
+    {"name":"Gattaca", "fadeIn": 5, "duration": 20, "strength": 0.6}
+  ],
+  "sequencePsy":
+  [
+    {"name":"AlexGrey", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Triangle", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Cat", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Graffiti", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Picasso", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Gattaca", "fadeIn": 5, "duration": 29, "strength": 0.8},
+    {"name":"Pineapple", "fadeIn": 5, "duration": 29, "strength": 0.8}
+  ],
+  "sequenceSkin":
+  [
+    {"name":"Muscle", "fadeIn": 5, "duration": 29, "strength": 0.8}
+  ],
+  "sequence":
+  [
+    {"name":"Fire", "fadeIn": 10, "duration": 20, "strength": 0.8},
+    {"name":"Water", "fadeIn": 10, "duration": 20, "strength": 0.7},
+    {"name":"Earth", "fadeIn": 10, "duration": 20, "strength": 0.8},
+    {"name":"AlexGrey", "fadeIn": 10, "duration": 20, "strength": 1},
+    {"name":"Triangle", "fadeIn": 10, "duration": 20, "strength": 0.7},
+    {"name":"Cat", "fadeIn": 10, "duration": 20, "strength": 0.7},
+    {"name":"Graffiti", "fadeIn": 10, "duration": 20, "strength": 0.8},
+    {"name":"Picasso", "fadeIn": 10, "duration": 20, "strength": 0.7},
+    {"name":"Gattaca", "fadeIn": 10, "duration": 20, "strength": 0.7},
+    {"name":"Pineapple", "fadeIn": 10, "duration": 20, "strength": 0.7},
+    {"name":"Wind", "fadeIn": 10, "duration": 20, "strength": 0.8}
+  ],
+  "sequenceAnimals":
+  [
+    {"name":"Leapord", "fadeIn": 4, "duration": 20, "strength": 0.5},
+    {"name":"Lizard", "fadeIn": 4, "duration": 20, "strength": 0.7},
+    {"name":"Feathers", "fadeIn": 4, "duration": 20, "strength": 0.6},
+    {"name":"Elephant", "fadeIn": 4, "duration": 20, "strength": 0.8}
+  ]
+}

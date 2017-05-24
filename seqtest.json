@@ -1,0 +1,24 @@
+{
+  "models": 
+  [
+    {
+      "name": "Mosaic",
+      "path": "../fast-neural-style/models/instance_norm/la_muse.t7"
+    },
+    {
+      "name": "Candy",
+      "path": "../fast-neural-style/models/instance_norm/candy.t7"
+    },
+     {
+      "name": "Scream",
+      "path": "../fast-neural-style/models/instance_norm/feathers.t7"
+    }
+
+  ],
+  "sequence":
+  [
+    {"name":"Candy", "fadeIn": 6, "duration": 3, "strength": 0.25},
+    {"name":"Mosaic", "fadeIn": 6, "duration": 3, "strength": 0.9},
+    {"name":"Scream", "fadeIn": 6, "duration": 3, "strength": 0.9}
+  ]
+}
