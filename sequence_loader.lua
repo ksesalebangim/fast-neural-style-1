@@ -1,7 +1,9 @@
-local Json = require("json")
+require "string"
+local json = require "json"
 require "torch"
 require "math"
 local model_loader = require "model_loader"
+local http_worker = require "http_worker"
 
 local M = {}
 local models = {}
@@ -12,8 +14,10 @@ local timer = torch.Timer()
 local manual_mode = false
 
 local current_fade = nil
--- TODO: dynamic
-local cooldown = 10
+local is_fading = false
+
+local URL_BASE = "http://127.0.0.1:5000/"
+
 
 local function load_models(models_object)
   local model_paths = {}
@@ -28,11 +32,39 @@ local function load_models(models_object)
   return models
 end
 
+-------- Sound handling functions
+
+
+---- Low-level
+
+local function sound_fade_in(name, duration)
+  http_worker.request(string.format("%splaySound/%s.ogg/fadeIn/%d",URL_BASE, name, duration))
+end
+
+local function sound_play(name)
+  sound_fade_in(name, 0)
+end
+
+local function sound_stop(name)
+  http_worker.request(string.format("%sstopSound/%s.ogg",URL_BASE, name))
+end
+
+local function sound_fade_out(name, duration)
+  http_worker.request(string.format("%sfadeOut/%s.ogg/fadeOut/%d",URL_BASE, name, duration))
+end
+
+local function sound_stop_all()
+  http_worker.request(URL_BASE .. "stopAllSounds")
+---- High-level
+
+--------- Fade between effects --------
 
 local function create_fade(src_index, dst_index)
   local src_effect = sequence[src_index + 1]
   local dst_effect = sequence[dst_index + 1]
   local fade = {
+                src_name = src_effect.name,
+                dst_name = dst_effect.name,
                 src_model = models[src_effect.name],
                 dst_model = models[dst_effect.name],
                 src_strength = src_effect.strength,
@@ -76,22 +108,23 @@ local function next_index(idx)
   return (idx + 1) % #sequence
 end
 
+------ End of Fade -------
+
 local function init(fileName, sequence_name)
   local file = io.open(fileName, "r")
-  if file then
-    local content = file:read("*a")
-    local lines = Json.decode(content)
-    io.close(file)
-    models = load_models(lines["models"])
-    sequence = lines[sequence_name]
-    targetEffectIndex = next_index(currentEffectIndex)
-    current_fade = create_fade(currentEffectIndex, targetEffectIndex)
-  end
+  local content = file:read("*a")
+  local lines = json.decode(content)
+  io.close(file)
+  models = load_models(lines["models"])
+  sequence = lines[sequence_name]
+  targetEffectIndex = next_index(currentEffectIndex)
+  current_fade = create_fade(currentEffectIndex, targetEffectIndex)
+  sound_stop_all()
 end
 
 local function set_manual_mode(is_manual_mode)
   manual_mode = is_manual_mode
-  if is_manual_mode then
+  if manual_mode then
     timer:stop()
   else
     timer:resume()
@@ -99,15 +132,22 @@ local function set_manual_mode(is_manual_mode)
 end
 
 local function go_to_next()
+  is_fading = false -- we just finished a fade
   timer:reset()
   --currentEffectIndex = targetEffectIndex
+  -- make sure sound state makes sense
+  if current_fade.src_name ~= current_fade.dst_name then
+    sound_stop(current_fade.src_name)
+  end
+  sound_play(current_fade.dst_name)
+
   currentEffectIndex = current_fade.dst_index
   targetEffectIndex = next_index(currentEffectIndex)
   local currentEffect = sequence[currentEffectIndex+1]
   local next_fade = create_fade(currentEffectIndex, targetEffectIndex)
   -- if this is a regular effect transition, use next_fade as-is
   -- otherwise specially create the next fade to start immediately
-  if (not is_manual_mode) and (current_fade.next_fades > 1) then
+  if (not manual_mode) and (current_fade.next_fades > 1) then
     print("Done with short manual fade, creating long manual fade")
     next_fade.duration = 0
     next_fade.next_fades = current_fade.next_fades - 1
@@ -117,7 +157,8 @@ local function go_to_next()
 end
 
 local function next()
-  if is_manual_mode then
+  if manual_mode then
+    print("manual next")
     go_to_next()
   else
     if is_fade_manual(current_fade) and is_fade_running(current_fade) then
@@ -145,6 +186,9 @@ local function next()
 
       -- mark as manual, with one fade following it immediately
       current_fade.next_fades = 2
+
+      -- (ugh) mark as not fading, so next get_models() will set up sound properly
+      is_fading = false
     end
     timer:reset()
     timer:resume()
@@ -156,6 +200,19 @@ local function get_models()
   if is_fade_done(current_fade) then
     go_to_next()
     return get_models()
+  end
+  if (not is_fading) and is_fade_fading(current_fade) then
+    -- start a sound fade since we just started fading
+    is_fading = true
+    local time_left = math.floor(
+                        math.max(
+                          0, 
+                          current_fade.fade_time - (timer:time().real - current_fade.duration)
+                          ) * 1000
+                        )
+
+    sound_fade_out(current_fade.src_name, time_left)
+    sound_fade_in(current_fade.dst_name, time_left)
   end
   -- fade_factor returns 0 = src, 1 = dst,
   -- invert that for blend strength

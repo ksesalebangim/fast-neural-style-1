@@ -14,7 +14,7 @@ end
 local function init()
    q = ipc.workqueue('my queue')
    -- Create 1 background worker that read from the named workqueue
-   workers = ipc.map(1, function()
+   workers = ipc.map(2, function()
      -- This function is not a closure, it is a totally clean Lua environment
      local ipc = require 'libipc'
      local http = require 'socket.http'

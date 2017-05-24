@@ -166,7 +166,7 @@ local function main()
   local opt = cmd:parse(arg)
 
   local dtype, use_cudnn = utils.setup_gpu(opt.gpu, opt.backend, opt.use_cudnn == 1)
-
+  http_worker.init()
   model_loader.init(dtype, use_cudnn)
   -- NOTE: MUST happen after model_loader.init()
   sequence_loader.init(opt.seqfile, opt.sequence)
