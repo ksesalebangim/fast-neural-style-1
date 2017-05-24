@@ -328,6 +328,7 @@ local function main()
     qt.doevents()
   end
   print("quitting")
+  http_worker.close()
   cam:stop()
   print("stopped")
   win.window:close()

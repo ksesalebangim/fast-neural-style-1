@@ -55,6 +55,7 @@ end
 
 local function sound_stop_all()
   http_worker.request(URL_BASE .. "stopAllSounds")
+end
 ---- High-level
 
 --------- Fade between effects --------
