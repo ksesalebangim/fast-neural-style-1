@@ -1,6 +1,6 @@
 local cv = require 'cv'
 require 'cv.imgproc'
-require 'cv.cudafilters'
+--require 'cv.cudafilters'
 
 require 'math'
 
@@ -195,12 +195,15 @@ local function main()
     img_out:add(1 - camera_factor,img[1])
     table.insert(imgs_out, img_out)
 
+    -- TODO: get rid of this since we use a single display image
+    -- we can use image.minmax manually on img_out
     local img_disp = image.toDisplayTensor{
       input = imgs_out,
       min = 0,
       max = 1,
       nrow = math.floor(math.sqrt(#imgs_out)),
     }
+
 
     if not win then
       -- On the first call use image.display to construct a window
