@@ -76,6 +76,11 @@ def stopSound(fileName):
     mixer.stop(str(fileName))
     return fileName
 
+@app.route('/stopAllSounds')
+def stopAllSounds():
+    mixer.stopAll()
+    return "All sounds stopped"
+
 @app.route('/fadeOut/<string:fileName>/fadeOut/<int:fadeOutMS>')
 def fadeOut(fileName,fadeOutMS):
     mixer.fadeOut(str(fileName),fadeOutMS)
