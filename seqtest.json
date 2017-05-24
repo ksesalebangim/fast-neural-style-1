@@ -17,8 +17,8 @@
   ],
   "sequence":
   [
-    {"name":"Candy", "fadeIn": 6, "duration": 3, "strength": 0.25},
-    {"name":"Mosaic", "fadeIn": 6, "duration": 3, "strength": 0.9},
-    {"name":"Scream", "fadeIn": 6, "duration": 3, "strength": 0.9}
+    {"name":"Candy", "fadeIn": 6, "duration": 30, "strength": 0.25},
+    {"name":"Mosaic", "fadeIn": 6, "duration": 30, "strength": 0.9},
+    {"name":"Scream", "fadeIn": 6, "duration": 30, "strength": 0.9}
   ]
 }
