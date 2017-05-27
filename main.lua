@@ -28,6 +28,7 @@ local cmd = torch.CmdLine()
 
 local SERVER_URL = 'http://localhost:5000/'
 
+local REALITY_CHANGE_INTERVAL = 0.0078125
 -- Model options
 cmd:option('-models', 'models/instance_norm/candy.t7,models/instance_norm/la_muse.t7')
 cmd:option('-height', 480)
@@ -140,16 +141,16 @@ local function main()
       http_worker.request(SERVER_URL .. "screenshot")
     elseif n == 'Key_Up' then
       print('Increase Effect ' .. manual_camera_factor)
-      manual_camera_factor = math.min(manual_camera_factor + 0.01, 1)
+      manual_camera_factor = math.min(manual_camera_factor + REALITY_CHANGE_INTERVAL, 1)
     elseif n == 'Key_Down' then
       print('Increase Reality ' .. manual_camera_factor)
-      manual_camera_factor = math.max(manual_camera_factor - 0.01, 0)
+      manual_camera_factor = math.max(manual_camera_factor - REALITY_CHANGE_INTERVAL, 0)
     elseif n == 'Key_Right' then
       print('Increase next effect' .. manual_factor)
-      manual_factor = math.min(manual_factor + 0.01, 1)
+      manual_factor = math.min(manual_factor + REALITY_CHANGE_INTERVAL, 1)
     elseif n == 'Key_Left' then
       print('Increase previous effect' .. manual_factor)
-      manual_factor = math.max(manual_factor - 0.01,  0)
+      manual_factor = math.max(manual_factor - REALITY_CHANGE_INTERVAL,  0)
     else
       print(k,n)
     end
