@@ -1,6 +1,4 @@
 #!/bin/sh
-sudo supervisorctl stop pyserver
-sudo supervisorctl stop webcamdemo
 sudo killall qlua
 sudo killall python
 sudo killall sudo

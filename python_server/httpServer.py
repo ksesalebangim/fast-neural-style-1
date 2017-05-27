@@ -49,7 +49,9 @@ def watchdogLoop():
 
 @app.route('/')
 def index():
-    return "Hello, World!"
+    basePath = os.path.dirname(os.path.realpath(__file__))
+    basePath = basePath+"/"
+    return basePath
 
 @app.route('/led/<led>')
 def led(led):
