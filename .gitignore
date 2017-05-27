@@ -6,3 +6,4 @@ data
 *.t7
 python_server/images
 *.pyc
+python_server/sounds

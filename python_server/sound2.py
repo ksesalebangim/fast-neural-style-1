@@ -29,4 +29,7 @@ class myMixer(object):
     def stop(self,fileName):
         self.sounds[fileName].stop()
 
+    def stopAll(self):
+        for sound in self.sounds.values():
+            sound.stop()
 
