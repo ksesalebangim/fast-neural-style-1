@@ -18,12 +18,30 @@ local is_fading = false
 
 local URL_BASE = "http://127.0.0.1:5000/"
 
+local default_factor = 1
 
-local function load_models(models_object)
-  local model_paths = {}
-  for _,v in pairs(models_object) do
-    model_paths[v.name] = v.path
+
+local function is_model_name_in_sequence(sequence, model_name)
+  local sequence_length = #sequence
+  for _,v in ipairs(sequence) do
+    if(v.name == model_name) then
+      print ('Found in sequence ' .. model_name)
+      return true
+    end
   end
+  return false
+end
+
+local function load_models(sequence, models_object)
+  local model_paths = {}
+  local seq_model = {}  
+
+  for _,v in pairs(models_object) do
+    if(is_model_name_in_sequence(sequence, v.name)) then
+      model_paths[v.name] = v.path
+    end
+  end
+
   local models = {}
   for k,v in pairs(model_paths) do
     models[k] = model_loader.load_model(v)
@@ -38,7 +56,7 @@ end
 ---- Low-level
 
 local function sound_fade_in(name, duration)
-  http_worker.request(string.format("%splaySound/%s.ogg/fadeIn/%d",URL_BASE, name, duration))
+  http_worker.request(string.format("%splaySound/%s_SFX.ogg/fadeIn/10",URL_BASE, name))
 end
 
 local function sound_play(name)
@@ -46,11 +64,11 @@ local function sound_play(name)
 end
 
 local function sound_stop(name)
-  http_worker.request(string.format("%sstopSound/%s.ogg",URL_BASE, name))
+  http_worker.request(string.format("%sstopSound/%s_SFX.ogg",URL_BASE, name))
 end
 
 local function sound_fade_out(name, duration)
-  http_worker.request(string.format("%sfadeOut/%s.ogg/fadeOut/%d",URL_BASE, name, duration))
+  http_worker.request(string.format("%sfadeOut/%s_SFX.ogg/fadeOut/10",URL_BASE, name))
 end
 
 local function sound_stop_all()
@@ -116,8 +134,8 @@ local function init(fileName, sequence_name)
   local content = file:read("*a")
   local lines = json.decode(content)
   io.close(file)
-  models = load_models(lines["models"])
   sequence = lines[sequence_name]
+  models = load_models(sequence, lines["models"])
   targetEffectIndex = next_index(currentEffectIndex)
   current_fade = create_fade(currentEffectIndex, targetEffectIndex)
   sound_stop_all()
@@ -130,6 +148,10 @@ local function set_manual_mode(is_manual_mode)
   else
     timer:resume()
   end
+end
+
+local function set_factor(factor)
+  default_factor = factor
 end
 
 local function go_to_next()
@@ -217,7 +239,7 @@ local function get_models()
   end
   -- fade_factor returns 0 = src, 1 = dst,
   -- invert that for blend strength
-  local factor = 1 - fade_factor(current_fade)
+  local factor = default_factor - fade_factor(current_fade)
   return current_fade.src_model, current_fade.dst_model, factor, current_fade.src_strength*factor + current_fade.dst_strength*(1 - factor)
 end
 
@@ -230,5 +252,6 @@ M.init = init
 M.next = next
 M.get_models = get_models
 M.set_manual_mode = set_manual_mode
+M.set_factor = set_factor
 M.close = close
 return M
